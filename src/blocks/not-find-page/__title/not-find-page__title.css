@@ -1,0 +1,10 @@
+.not-find-page__title {
+    margin: 246px 440px 0 440px;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 169px;
+    min-width: 400px;
+    min-height: 169px;
+    border: #ff003b 1px solid;
+    text-align: center;
+}

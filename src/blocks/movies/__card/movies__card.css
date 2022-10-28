@@ -1,0 +1,6 @@
+.movies__card {
+    background-color: #222222;
+    min-width: 364px;
+    min-height: 271px;
+    border: red 1px solid;
+}

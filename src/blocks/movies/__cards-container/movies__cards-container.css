@@ -1,0 +1,11 @@
+.movies__cards-container {
+    min-width: 1140px;
+    margin: 0 70px 0 70px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    row-gap: 30px;
+    column-gap: 24px;
+    border: yellow 1px solid;
+}

@@ -1,0 +1,6 @@
+.student__about-container {
+    margin: 66px 70px 0 70px;
+    border: blue 1px solid;
+    display: flex;
+    justify-content: space-between;
+}

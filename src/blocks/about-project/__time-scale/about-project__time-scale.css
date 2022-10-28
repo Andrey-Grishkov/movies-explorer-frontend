@@ -1,0 +1,23 @@
+.about-project__time-scale {
+    margin: 0;
+    background: #303030;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    min-width: 228px;
+    min-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.about-project__time-scale:first-of-type {
+    background: #3DDC84;
+    color: #000000;
+}
+
+.about-project__time-scale:before {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: "";
+}

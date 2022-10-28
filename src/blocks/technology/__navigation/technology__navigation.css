@@ -1,0 +1,9 @@
+.technology__navigation {
+    padding: 0;
+    min-height: 60px;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: #ff003b 1px solid;
+}

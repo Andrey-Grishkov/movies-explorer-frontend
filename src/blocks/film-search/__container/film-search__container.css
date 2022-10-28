@@ -1,0 +1,7 @@
+.film-search__container {
+    margin: 70px 70px 0 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #424242 1px solid;
+}

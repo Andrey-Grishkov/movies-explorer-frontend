@@ -1,0 +1,7 @@
+.student__foto {
+    margin: 0;
+    max-width: 270px;
+    min-height: 327px;
+    object-fit: cover;
+    border-radius: 10px;
+}

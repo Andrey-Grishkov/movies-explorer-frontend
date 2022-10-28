@@ -1,0 +1,15 @@
+.header__link {
+    margin-right: 30px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.header__link:hover {
+    transition: 1s ease-in;
+    opacity: .5;
+}

@@ -1,0 +1,6 @@
+.film-search__search-button {
+    max-width: 80px;
+    min-height: 34px;
+    object-fit: fill;
+    cursor: pointer;
+}

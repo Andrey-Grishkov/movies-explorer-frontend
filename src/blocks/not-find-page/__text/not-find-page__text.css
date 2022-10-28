@@ -1,0 +1,9 @@
+.not-find-page__text {
+    margin: 5px 440px 0 440px;
+    min-width: 400px;
+    border: #3DDC84 1px solid;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+}

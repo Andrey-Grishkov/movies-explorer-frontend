@@ -1,0 +1,12 @@
+.about-project__card {
+    margin: 70px 20px 110px 0;
+    min-width: 550px;
+    border: yellowgreen 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.about-project__card:last-of-type {
+    margin-right: 0;
+}

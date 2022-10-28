@@ -1,0 +1,10 @@
+.footer__container {
+    margin: 0 70px 0 70px;
+    padding: 0;
+    max-height: 56px;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: #424242 1px solid;
+}

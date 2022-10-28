@@ -1,0 +1,7 @@
+.header__route-content {
+    min-width: 221px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}

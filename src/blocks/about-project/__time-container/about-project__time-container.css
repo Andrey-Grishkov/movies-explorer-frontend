@@ -1,0 +1,9 @@
+.about-project__time-container {
+    max-width: 1280px;
+    margin: 0 70px 110px 70px;
+    display: grid;
+    grid-template-columns: 228px auto;
+    grid-template-rows: 36px min-content;
+    border: #ff003b 1px solid;
+    grid-row-gap: 14px;
+}

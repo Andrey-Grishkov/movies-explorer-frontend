@@ -1,0 +1,9 @@
+.auth-confirm__container {
+    margin: 16px auto 70px 531px;
+    max-width: 217px;
+    min-height: 17px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    border: #ff003b 1px solid;
+}

@@ -1,0 +1,7 @@
+.movies__card-image {
+    margin: 0;
+    max-width: 364px;
+    max-height: 203px;
+    object-fit: cover;
+    background-color: #222222;
+}

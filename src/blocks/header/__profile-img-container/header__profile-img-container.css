@@ -1,0 +1,9 @@
+.header__profile-img-container {
+    min-width: 26px;
+    min-height: 30px;
+    border-radius: 4px;
+    background-color: #313131;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

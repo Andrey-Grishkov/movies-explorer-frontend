@@ -1,0 +1,6 @@
+.student__link-arrow {
+    max-width: 29px;
+    min-height: 60px;
+    object-fit: fill;
+    cursor: pointer;
+}

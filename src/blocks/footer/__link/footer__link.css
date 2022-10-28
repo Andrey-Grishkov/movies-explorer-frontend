@@ -1,0 +1,13 @@
+.footer__link {
+    padding: 0;
+    align-self: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    border: yellow 1px solid;
+}
+
+.footer__link:last-of-type{
+    margin-left: 20px;
+}

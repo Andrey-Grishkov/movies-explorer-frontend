@@ -1,0 +1,9 @@
+.film-search__checkbox {
+    margin: 32px auto 0 70px;
+    min-width: content-box;
+    min-height: 20px;
+    border: #ff003b 1px solid;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
