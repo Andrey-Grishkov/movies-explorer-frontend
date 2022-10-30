@@ -1,4 +1,5 @@
 .student {
+    margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 1079px;
     border: coral 1px solid;

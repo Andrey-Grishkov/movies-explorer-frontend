@@ -13,6 +13,7 @@ import movie8 from "../images/movies__initional-movies/movies__card-image-8.png"
 import movie9 from "../images/movies__initional-movies/movies__card-image-9.png";
 import logo from "../images/header__logo.svg";
 
+
 function Main() {
   return (
     <main className='content'>
@@ -293,8 +294,8 @@ function Main() {
           <p className='auth-confirm__text'>Уже зарегистрированы?</p>
           <p className='auth-confirm__link'>Войти</p>
         </div>
-
       </section>
+
     </main>
   );
 }

@@ -1,4 +1,6 @@
 .auth-form {
+    margin: 0 auto 0 auto;
+    max-width: 1280px;
     min-height: 266px;
     border: #ff003b 1px solid;
 }

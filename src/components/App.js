@@ -4,7 +4,9 @@ import Footer from './Footer';
 import Main from './Main';
 import HeaderAuth from './HeaderAuth'
 import HeaderBurger from './HeaderBurger'
+import MenuPopup from './MenuPopup'
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import profile from "../images/header__profile-img.svg";
 
 function App() {
 
@@ -16,8 +18,9 @@ function App() {
         <Header />
         <HeaderBurger />
         <HeaderAuth />
-        <Main/>
+        <Main />
         <Footer />
+        <MenuPopup />
       </div>
     </CurrentUserContext.Provider>
   );
