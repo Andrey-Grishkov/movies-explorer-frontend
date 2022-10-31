@@ -4,3 +4,9 @@
     min-height: 266px;
     border: #ff003b 1px solid;
 }
+
+@media screen and (max-width: 768px) {
+    .auth-form {
+        max-width: 768px;
+    }
+}

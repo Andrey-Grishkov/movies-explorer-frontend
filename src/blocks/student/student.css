@@ -4,3 +4,9 @@
     min-height: 1079px;
     border: coral 1px solid;
 }
+
+@media screen and (max-width: 1024px) {
+    .student {
+        min-height: 994px;
+    }
+}

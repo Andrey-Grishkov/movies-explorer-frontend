@@ -1,5 +1,5 @@
 .auth-confirm__button {
-    margin: 69px 0 0 442px;
+    margin: 69px 0 0 0;
     padding-left: 125px;
     padding-right: 125px;
     min-height: 45px;
@@ -11,4 +11,14 @@
     border-radius: 3px;
     color: #FFFFFF;
     cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+    .auth-confirm__button {
+        margin-top: 157px;
+        padding-left: 68px;
+        padding-right: 68px;
+        font-size: 12px;
+        line-height: 15px;
+    }
 }

@@ -8,3 +8,15 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+    .user-info {
+        min-height: 920px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user-info {
+        min-height: 706px;
+    }
+}

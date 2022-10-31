@@ -5,3 +5,18 @@
     line-height: 58px;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__name {
+        font-size: 40px;
+        line-height: 40px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .student__name {
+        margin-top: 40px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+}

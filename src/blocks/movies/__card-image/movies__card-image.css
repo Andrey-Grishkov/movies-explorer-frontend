@@ -1,7 +1,13 @@
 .movies__card-image {
-    margin: 0;
-    max-width: 364px;
-    max-height: 203px;
-    object-fit: cover;
+    margin: 0 auto 0 auto;
+    max-width: 100%;
+    min-height: 190px;
+    object-fit: inherit;
     background-color: #222222;
+}
+
+@media screen and (max-width: 720px) {
+    .movies__card-image {
+        max-height: 168px;
+    }
 }

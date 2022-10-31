@@ -5,3 +5,15 @@
     align-items: center;
     border-bottom: #424242 1px solid;
 }
+
+@media screen and (max-width: 768px) {
+    .film-search__container {
+        margin: 80px 30px 0 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .film-search__container {
+        margin: 90px 14px 0 14px;
+    }
+}

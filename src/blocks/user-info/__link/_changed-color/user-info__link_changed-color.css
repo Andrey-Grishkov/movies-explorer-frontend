@@ -4,3 +4,9 @@
     font-weight: 500;
     color: #EE3465;
 }
+
+@media screen and (max-width: 480px) {
+    .user-info__link_changed-color {
+        margin-bottom: 40px;
+    }
+}

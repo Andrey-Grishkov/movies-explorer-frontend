@@ -6,17 +6,8 @@
     border: yellow 1px solid;
 }
 
-/*@media screen and (min-width: 1281px) {*/
-/*    .footer {*/
-/*        margin: 0;*/
-/*        max-width: 318px;*/
-/*        padding-bottom: 60px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 320px) {*/
-/*    .footer {*/
-/*        margin: 0 8.44vw 0 8.44vw;*/
-/*        padding-bottom: 11.25vw;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 768px) {
+    .footer {
+        max-width: 768px;
+    }
+}

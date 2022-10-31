@@ -4,3 +4,18 @@
     font-size: 30px;
     line-height: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .student__link-name {
+        font-size: 28px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .student__link-name {
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.04em;
+    }
+}

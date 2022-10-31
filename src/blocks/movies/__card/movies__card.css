@@ -1,6 +1,20 @@
 .movies__card {
     background-color: #222222;
-    min-width: 364px;
+    max-width: 100%;
     min-height: 271px;
-    border: red 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .movies__card {
+        min-height: 258px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .movies__card {
+        min-height: 236px;
+    }
 }

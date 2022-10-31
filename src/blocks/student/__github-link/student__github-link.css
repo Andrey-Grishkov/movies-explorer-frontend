@@ -5,3 +5,17 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__github-link {
+        margin-top: 87px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .student__github-link {
+        margin-top: 40px;
+    }
+}

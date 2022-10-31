@@ -5,3 +5,18 @@
     font-size: 14px;
     line-height: 22px;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__biography {
+        margin-top: 20px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .student__biography {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

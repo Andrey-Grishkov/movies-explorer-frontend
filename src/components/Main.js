@@ -266,8 +266,10 @@ function Main() {
         <p className='not-find-page__link'>Назад</p>
       </section>
       <section className='header-auth'>
-        <img className='header-auth__logo' src={logo} alt='логотип movies-explorer' />
-        <p className='header-auth__text'>Добро пожаловать!</p>
+        <div className='header-auth__container'>
+          <img className='header-auth__logo' src={logo} alt='логотип movies-explorer' />
+          <p className='header-auth__text'>Добро пожаловать!</p>
+        </div>
       </section>
       <section className='auth-form'>
         <ul className='auth-form__container'>

@@ -5,3 +5,10 @@
     object-fit: cover;
     border-radius: 10px;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__foto {
+        max-width: 255px;
+        min-height: 307px;
+    }
+}

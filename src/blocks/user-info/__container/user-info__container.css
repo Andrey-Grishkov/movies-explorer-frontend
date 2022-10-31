@@ -8,3 +8,9 @@
 .user-info__container:last-of-type {
     border: none;
 }
+
+@media screen and (max-width: 480px) {
+    .user-info__container {
+        min-width: 260px;
+    }
+}

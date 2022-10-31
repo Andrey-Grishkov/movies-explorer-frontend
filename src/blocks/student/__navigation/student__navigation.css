@@ -2,3 +2,15 @@
     margin: 30px 70px 125px 70px;
     border: #3DDC84 1px solid;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__navigation {
+        margin: 30px 50px 90px 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .student__navigation {
+        margin: 20px 14px 70px 14px;
+    }
+}

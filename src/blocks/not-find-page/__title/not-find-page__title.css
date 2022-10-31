@@ -1,5 +1,5 @@
 .not-find-page__title {
-    margin: 246px 440px 0 440px;
+    margin: 246px 0 0 0;
     font-weight: 400;
     font-size: 140px;
     line-height: 169px;
@@ -7,4 +7,20 @@
     min-height: 169px;
     border: #ff003b 1px solid;
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .not-find-page__title {
+        margin-top: 408px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .not-find-page__title {
+        margin-top: 329px;
+        min-width: 300px;
+        min-height: 97px;
+        font-size: 80px;
+        line-height: 97px;
+    }
 }

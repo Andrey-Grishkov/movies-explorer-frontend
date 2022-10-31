@@ -8,3 +8,9 @@
     line-height: 16px;
     border: yellow 1px solid;
 }
+
+@media screen and (max-width: 480px) {
+    .footer__copyring {
+        margin: 0 0 10px 0;
+    }
+}

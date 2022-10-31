@@ -6,3 +6,10 @@
     color: #4285F4;
     cursor: pointer;
 }
+
+@media screen and (max-width: 480px) {
+    .auth-confirm__text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

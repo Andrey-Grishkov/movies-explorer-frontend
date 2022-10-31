@@ -5,3 +5,19 @@
     font-size: 18px;
     line-height: 20px;
 }
+
+@media screen and (max-width: 1024px) {
+    .student__about {
+        margin-top: 16px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .student__about {
+        margin-top: 20px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

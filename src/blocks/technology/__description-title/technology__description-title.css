@@ -7,3 +7,19 @@
     text-align: center;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+    .technology__description-title {
+        margin-top: 80px;
+        margin-bottom: 22px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .technology__description-title {
+        margin-top: 60px;
+        margin-bottom: 24px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+}

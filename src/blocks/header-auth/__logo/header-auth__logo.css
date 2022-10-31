@@ -1,6 +1,17 @@
 .header-auth__logo {
-    margin-left: 442px;
     margin-top: 70px;
-    min-width: 38px;
+    max-width: 38px;
     min-height: 38px;
+}
+
+@media screen and (max-width: 768px) {
+    .header-auth__logo {
+        margin-top: 232px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header-auth__logo {
+        margin: 56px auto 0 auto;
+    }
 }
