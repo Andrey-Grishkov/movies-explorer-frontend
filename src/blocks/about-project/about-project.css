@@ -7,3 +7,17 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+@media screen and (max-width: 768px) {
+    .about-project {
+        max-width: 768px;
+        min-height: 585px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-project {
+        max-width: 320px;
+        min-height: 641px;
+    }
+}

@@ -5,3 +5,10 @@
     flex-direction: row;
     justify-content: flex-end;
 }
+
+@media screen and (max-width: 768px) {
+    .header__route-content {
+        min-width: 183px;
+    }
+}
+

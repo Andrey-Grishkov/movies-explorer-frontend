@@ -5,3 +5,17 @@
     line-height: 20px;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+    .about-project__card-description {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .about-project__card-description {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

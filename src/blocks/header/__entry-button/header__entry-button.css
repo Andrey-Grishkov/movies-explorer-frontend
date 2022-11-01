@@ -1,5 +1,5 @@
 .header__entry-button {
-    margin: 21px 70px 21px auto;
+    margin: 21px 70px 21px 0;
     min-width: 76px;
     min-height: 32px;
     padding: 0;
@@ -18,4 +18,17 @@
 .header__entry-button:hover {
     transition: 1s ease-in;
     opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+    .header__entry-button {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header__entry-button {
+        margin-right: 14px;
+        font-size: 10px;
+    }
 }

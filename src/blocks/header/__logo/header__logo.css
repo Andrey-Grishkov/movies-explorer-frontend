@@ -1,21 +1,17 @@
 .header__logo {
-    margin-left: 70px;
-    margin-top: 18px;
-    margin-bottom: 18px;
+    margin: 18px 0 18px 70px;
     min-width: 38px;
     min-height: 38px;
 }
 
-/*@media screen and (min-width: 1281px) {*/
-/*    .header__logo {*/
-/*        min-width: 142px;*/
-/*        min-height: 33px;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 768px) {
+    .header__logo {
+        margin-left: 30px;
+    }
+}
 
-/*@media screen and (max-width: 320px) {*/
-/*    .header__logo {*/
-/*        max-width: 104px;*/
-/*        margin: 0 auto 10vw 8.44vw;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 480px) {
+    .header__logo {
+        margin-left: 14px;
+    }
+}
