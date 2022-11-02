@@ -8,3 +8,11 @@
     background-position: center;
     border: none;
 }
+
+@media screen and (max-width: 320px) {
+    .header__menu-button {
+        margin-right: 14px;
+        min-height: 43px;
+        min-width: 40px;
+    }
+}

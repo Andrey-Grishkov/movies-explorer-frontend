@@ -4,7 +4,7 @@ import close from "../images/menu-popup__close.svg";
 
 function MenuPopup() {
   return (
-    <div className='menu-popup'>
+    <div className='menu-popup menu-popup_is-opened'>
       <div className='menu-popup__content'>
         <button className='menu-popup__close' type="button">
           <img className='menu-popup__close-img' src={close}/>

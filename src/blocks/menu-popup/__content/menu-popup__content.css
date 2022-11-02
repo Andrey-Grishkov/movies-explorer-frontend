@@ -8,3 +8,10 @@
     position: relative;
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 540px) {
+    .user-info {
+        max-width: 540px;
+        border: #ff003b 1px solid;
+    }
+}

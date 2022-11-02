@@ -1,3 +1,9 @@
 .menu-popup__button {
-    margin: 68.3vw auto 92px auto;
+    margin: 621px auto 0 auto;
+}
+
+@media screen and (max-width: 320px) {
+    .menu-popup__button {
+        margin-top: 444px;
+    }
 }

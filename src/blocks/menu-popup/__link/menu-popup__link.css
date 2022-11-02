@@ -11,9 +11,15 @@
 }
 
 .menu-popup__link:first-of-type {
-    margin-top: 105px;
+    padding-top: 159px;
 }
 
 .menu-popup__link:hover {
     border-bottom: #FFFFFF 2px solid;
+}
+
+@media screen and (max-width: 540px) {
+    .menu-popup__link:first-of-type {
+        padding-top: 144px;
+    }
 }
