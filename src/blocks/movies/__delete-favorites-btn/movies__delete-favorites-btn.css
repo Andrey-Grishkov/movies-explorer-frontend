@@ -3,7 +3,7 @@
     min-width: 30px;
     min-height: 30px;
     cursor: pointer;
-    background-image: url('../../../images/movies__delete-favorites-btn.svg');
+    background-image: url('../../../images/movies-card__delete-favorites-btn.svg');
     background-repeat: no-repeat;
     padding: 0;
     border: none;
