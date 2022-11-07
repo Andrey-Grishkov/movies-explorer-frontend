@@ -24,6 +24,11 @@
     cursor: pointer;
 }
 
+.scroll-movies-btn__button:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
 @media screen and (max-width: 480px) {
     .scroll-movies-btn__button {
         min-width: 240px;
