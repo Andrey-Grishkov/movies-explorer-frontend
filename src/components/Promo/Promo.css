@@ -4,7 +4,6 @@
     min-height: 493px;
     max-width: 1280px;
     align-self: center;
-    border: #162c3d 1px solid;
     border-radius: 10px;
     background-color: #272727;
 }
@@ -32,7 +31,7 @@
 }
 
 .promo__title {
-    margin-top: 160px;
+    padding-top: 160px;
     font-style: normal;
     font-weight: 400;
     font-size: 50px;
@@ -43,7 +42,7 @@
 
 @media screen and (max-width: 768px) {
     .promo__title {
-        margin-top: 350px;
+        padding-top: 350px;
         font-size: 40px;
         line-height: 52px;
     }

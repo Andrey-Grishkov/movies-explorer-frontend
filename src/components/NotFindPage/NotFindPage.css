@@ -2,7 +2,6 @@
     margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 700px;
-    border: yellow 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +26,6 @@
     line-height: 169px;
     min-width: 400px;
     min-height: 169px;
-    border: #ff003b 1px solid;
     text-align: center;
 }
 
@@ -50,7 +48,6 @@
 .not-find-page__text {
     margin: 5px 0 0 0;
     min-width: 400px;
-    border: #3DDC84 1px solid;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;

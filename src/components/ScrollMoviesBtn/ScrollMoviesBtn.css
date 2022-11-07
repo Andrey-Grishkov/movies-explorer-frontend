@@ -2,7 +2,6 @@
     margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 166px;
-    border: #3DDC84 1px solid;
     display: flex;
     justify-content: center;
 }

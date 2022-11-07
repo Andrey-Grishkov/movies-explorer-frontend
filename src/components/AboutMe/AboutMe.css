@@ -2,7 +2,6 @@
     margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 1079px;
-    border: coral 1px solid;
 }
 
 @media screen and (max-width: 1024px) {
@@ -47,7 +46,6 @@
 
 .about-me__container {
     margin: 66px 70px 0 70px;
-    border: blue 1px solid;
     display: flex;
     justify-content: space-between;
 }
@@ -92,7 +90,6 @@
 
 .about-me__description {
     max-width: 600px;
-    border: yellow 1px solid;
 }
 
 @media screen and (max-width: 1024px) {
@@ -214,7 +211,6 @@
 
 .about-me__navigation {
     margin: 30px 70px 125px 70px;
-    border: #3DDC84 1px solid;
 }
 
 @media screen and (max-width: 1024px) {

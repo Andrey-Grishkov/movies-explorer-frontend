@@ -2,7 +2,6 @@
     margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 266px;
-    border: #ff003b 1px solid;
 }
 
 @media screen and (max-width: 768px) {
@@ -15,7 +14,6 @@
     margin: 0 auto 0 auto;
     max-width: 1280px;
     min-height: 217px;
-    border: #4285F4 1px solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +33,6 @@
 
 .authorization__header-container {
     min-width: 396px;
-    border: #ff003b 1px solid;
 }
 
 @media screen and (max-width: 480px) {
@@ -77,7 +74,6 @@
     max-width: 396px;
     padding: 0;
     list-style: none;
-    border: #3DDC84 1px solid;
 }
 
 @media screen and (max-width: 480px) {
@@ -128,7 +124,6 @@
     margin: 0 auto 0 auto;
     min-height: 217px;
     max-width: 1280px;
-    border: #3DDC84 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -194,7 +189,6 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
-    border: #ff003b 1px solid;
 }
 
 @media screen and (max-width: 480px) {

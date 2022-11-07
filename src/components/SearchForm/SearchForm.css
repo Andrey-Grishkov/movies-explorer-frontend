@@ -2,7 +2,6 @@
     margin: 0 auto 0 auto;
     min-height: 217px;
     max-width: 1280px;
-    border: #ff003b 1px solid;
 }
 
 @media screen and (max-width: 768px) {
@@ -57,7 +56,6 @@
     margin: 32px 70px 0 70px;
     min-width: content-box;
     min-height: 20px;
-    border: #ff003b 1px solid;
     display: flex;
     justify-content: flex-start;
     align-items: center;
