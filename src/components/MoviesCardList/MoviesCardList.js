@@ -12,5 +12,4 @@ const MoviesCardList = ({cards, flag}) => {
   );
 }
 
-
 export default MoviesCardList;

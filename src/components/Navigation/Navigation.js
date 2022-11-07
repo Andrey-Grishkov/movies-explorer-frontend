@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
 import './Navigation.css'
 import NavProfileBtn from "../NavProfileBtn/NavProfileBtn";
 import close from "../../images/navigation__close.svg";

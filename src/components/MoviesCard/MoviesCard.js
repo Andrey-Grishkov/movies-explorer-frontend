@@ -29,11 +29,4 @@ const MoviesCard = ({card, flag}) => {
   );
 }
 
-// className={`movies-card__mark movies-card__mark_${mark} movies-card__mark_${
-//   saveMovies ? 'active' : ''
-// }`}
-// onClick={handleSaveMovie}
-
-
-
 export default MoviesCard;
