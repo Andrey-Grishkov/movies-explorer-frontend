@@ -8,7 +8,7 @@ const Movies = ({cards}) => {
   return (
     <section className='movies'>
       <SearchForm />
-      <MoviesCardList cards={cards}/>
+      <MoviesCardList cards={cards} flag='add-favorites-btn'/>
       <ScrollMoviesBtn />
     </section>
   );

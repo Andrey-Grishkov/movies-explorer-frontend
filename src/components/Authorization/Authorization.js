@@ -44,7 +44,5 @@ function Authorization(props) {
     </section>
   );
 }
-// {`${props.authType === 'register' ? 'authorization__confirm-button' : 'authorization__confirm-button authorization__confirm-button-login'}`
-// className={`${isErr ? "authorizatio__input authorizatio__input_active" : "authorizatio__input"}`
 
 export default Authorization;

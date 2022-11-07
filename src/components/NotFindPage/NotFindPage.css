@@ -3,6 +3,9 @@
     max-width: 1280px;
     min-height: 700px;
     border: yellow 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -71,6 +74,7 @@
     cursor: pointer;
     color: #4285F4;
     text-align: center;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 480px) {

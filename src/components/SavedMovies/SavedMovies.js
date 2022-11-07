@@ -8,7 +8,7 @@ const SavedMovies = ({cards}) => {
   return (
     <section className='saved-movies'>
       <SearchForm />
-      <MoviesCardList cards={cards}/>
+      <MoviesCardList cards={cards} flag='delete-favorites-btn'/>
       <ScrollMoviesBtn />
     </section>
   );

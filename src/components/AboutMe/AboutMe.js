@@ -19,7 +19,7 @@ function AboutMe() {
             Решил поменять сферу деятельности и стать фронтенд-разработчиком.
             Для воплощения своей мечты осваиваю курс веб-разработчика от Яндекс практикум</p>
           <p className='about-me__github-link-container'>
-            <a className='about-me__github-link' href='https://github.com/Andrey-Grishkov'>
+            <a className='about-me__github-link' href='https://github.com/Andrey-Grishkov' target="_blank">
               Github
             </a>
           </p>
@@ -28,15 +28,15 @@ function AboutMe() {
       </div>
       <p className='about-me__portfolio-link'>Портфолио</p>
       <nav className='about-me__navigation'>
-        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/how-to-learn/'>
+        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/how-to-learn/' target="_blank">
           <p className='about-me__link-name'>Статичный сайт</p>
           <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
         </a>
-        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/russian-travel/'>
+        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/russian-travel/' target="_blank">
           <p className='about-me__link-name'>Адаптивный сайт</p>
           <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
         </a>
-        <a className='about-me__link-container' href='https://mesto.front.grishkov.nomoredomains.icu'>
+        <a className='about-me__link-container' href='https://mesto.front.grishkov.nomoredomains.icu' target="_blank">
           <p className='about-me__link-name'>Одностраничное приложение</p>
           <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
         </a>

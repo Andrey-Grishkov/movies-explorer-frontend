@@ -8,8 +8,8 @@ function Footer() {
       <div className="footer__container">
         <p className='footer__copyring'>&copy; 2022</p>
         <nav className="footer__links">
-          <a className='footer__link' href='https://practicum.yandex.ru'>Яндекс.Практикум</a>
-          <a className='footer__link' href='https://github.com/Andrey-Grishkov'>Github</a>
+          <a className='footer__link' href='https://practicum.yandex.ru' target="_blank">Яндекс.Практикум</a>
+          <a className='footer__link' href='https://github.com/Andrey-Grishkov' target="_blank">Github</a>
         </nav>
       </div>
     </footer>
