@@ -10,11 +10,17 @@ function Navigation(props) {
         <button className='navigation__close' type='button' onClick={props.onClick}>
           <img className='navigation__close-img' src={close} alt='закрыть'/>
         </button>
-        <nav className='navigation__link-container'>
-          <a className="navigation__link" href="/">Главная</a>
-          <a className='navigation__link' href='/movies'>Фильмы</a>
-          <a className='navigation__link' href='/saved-movies'>Сохраненные фильмы</a>
-        </nav>
+        <ul className='navigation__links'>
+          <li className="navigation__link-container">
+            <a className="navigation__link" href="/">Главная</a>
+          </li>
+          <li className="navigation__link-container">
+            <a className="navigation__link" href='/movies'>Фильмы</a>
+          </li>
+          <li className="navigation__link-container">
+            <a className="navigation__link" href='/saved-movies'>Сохраненные фильмы</a>
+          </li>
+        </ul>
         <div className='navigation__button-container'>
           <NavProfileBtn onClick={props.onClick}/>
         </div>

@@ -18,18 +18,22 @@ function Authorization(props) {
         {props.authType === 'register' && (
         <li className='authorization__part-form'>
           <p className='authorization__name'>Имя</p>
-          <input className='authorization__input' placeholder='Имя'/>
+          <input className='authorization__input' placeholder='Имя' type="text" id="name" name="name" minLength="2"
+                 maxLength="30" required/>
         </li>)}
         {props.authType === 'register' && (<p className='authorization__validation-text'>что-то пошло не так...</p>
           )}
         <li className='authorization__part-form'>
           <p className='authorization__name'>E-mail</p>
-          <input className='authorization__input' placeholder='E-mail'/>
+          <input className='authorization__input' placeholder='E-mail' type="email" id="email" name="email" minLength="2"
+                 maxLength="30" required/>
         </li>
         <p className='authorization__validation-text'>что-то пошло не так...</p>
         <li className='authorization__part-form'>
           <p className='authorization__name'>Пароль</p>
-          <input className='authorization__input' placeholder='Пароль' type='password'/>
+          <input className='authorization__input' placeholder='Пароль' type='password' id="password" name="password"
+                 minLength="2"
+                 maxLength="30" required/>
         </li>
         <p className='authorization__validation-text'>что-то пошло не так...</p>
       </ul>

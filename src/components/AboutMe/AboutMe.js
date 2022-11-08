@@ -27,20 +27,26 @@ function AboutMe() {
         <img className='about-me__foto' src={foto} alt='фотография студента' />
       </div>
       <p className='about-me__portfolio-link'>Портфолио</p>
-      <nav className='about-me__navigation'>
-        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/how-to-learn/' target="_blank">
-          <p className='about-me__link-name'>Статичный сайт</p>
-          <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-        </a>
-        <a className='about-me__link-container' href='https://andrey-grishkov.github.io/russian-travel/' target="_blank">
-          <p className='about-me__link-name'>Адаптивный сайт</p>
-          <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-        </a>
-        <a className='about-me__link-container' href='https://mesto.front.grishkov.nomoredomains.icu' target="_blank">
-          <p className='about-me__link-name'>Одностраничное приложение</p>
-          <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
-        </a>
-      </nav>
+      <ul className='about-me__navigation'>
+        <li>
+          <a className='about-me__link-container' href='https://andrey-grishkov.github.io/how-to-learn/' target="_blank">
+            <p className='about-me__link-name'>Статичный сайт</p>
+            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
+          </a>
+        </li>
+        <li>
+          <a className='about-me__link-container' href='https://andrey-grishkov.github.io/russian-travel/' target="_blank">
+            <p className='about-me__link-name'>Адаптивный сайт</p>
+            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
+          </a>
+        </li>
+        <li>
+          <a className='about-me__link-container' href='https://mesto.front.grishkov.nomoredomains.icu' target="_blank">
+            <p className='about-me__link-name'>Одностраничное приложение</p>
+            <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
+          </a>
+        </li>
+      </ul>
     </section>
   );
 }

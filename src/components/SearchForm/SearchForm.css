@@ -37,19 +37,35 @@
 }
 
 .search-form__name {
+    min-width: calc(100% - 82px);
+    padding: 0;
     margin-top: 0;
     margin-bottom: 13px;
     font-weight: 500;
     font-size: 28px;
     line-height: 34px;
     color: #8B8B8B;
+    border: none;
+    background-color: #202020;
+    outline: none;
+}
+
+.search-form__name:focus {
+    box-shadow: 0 0 0 1px #4285F4;
 }
 
 .search-form__search-button {
     max-width: 80px;
     min-height: 34px;
-    object-fit: fill;
+    padding: 0;
+    border: none;
+    background-color: #202020;
     cursor: pointer;
+}
+
+.search-form__search-image {
+    object-fit: fill;
+
 }
 
 .search-form__checkbox {

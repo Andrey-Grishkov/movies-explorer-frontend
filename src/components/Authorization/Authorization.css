@@ -106,6 +106,11 @@
     border: none;
     background-color: #202020;
     color: #FFFFFF;
+    outline: none;
+}
+
+.authorization__input:focus {
+    box-shadow: 0 0 0 1px #4285F4;
 }
 
 .authorization__validation-text {
