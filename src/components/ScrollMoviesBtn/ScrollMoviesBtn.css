@@ -1,0 +1,35 @@
+.scroll-movies-btn {
+    margin: 0 auto 0 auto;
+    max-width: 1280px;
+    min-height: 166px;
+    display: flex;
+    justify-content: center;
+}
+
+.scroll-movies-btn__button {
+    margin-top: 50px;
+    margin-bottom: 80px;
+    padding: 0;
+    min-width: 320px;
+    min-height: 36px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    border: #424242 1px solid;
+    border-radius: 10px;
+    background-color: #202020;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.scroll-movies-btn__button:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
+@media screen and (max-width: 480px) {
+    .scroll-movies-btn__button {
+        min-width: 240px;
+    }
+}

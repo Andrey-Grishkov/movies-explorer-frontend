@@ -1,0 +1,111 @@
+.footer {
+    margin: 0 auto 0 auto;
+    padding: 0;
+    max-width: 1280px;
+    min-height: 172px;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        max-width: 768px;
+    }
+}
+
+.footer__title {
+    margin: 79px 5.47vw 0 5.47vw;
+    padding: 0 0 20px 0;
+    align-self: center;
+    text-align: center;
+    color: #8B8B8B;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    border-bottom: #424242 1px solid;
+}
+
+.footer__container {
+    margin: 0 5.47vw 0 5.47vw;
+    padding: 0;
+    max-height: 56px;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .footer__container {
+        margin: 0 30px 0 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer__container {
+        margin-top: 52px;
+        max-height: 127px;
+        flex-direction: column-reverse;
+    }
+}
+
+.footer__copyring {
+    margin: 20px 0 20px 0;
+    padding: 0;
+    align-self: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+@media screen and (max-width: 480px) {
+    .footer__copyring {
+        margin: 0 0 10px 0;
+    }
+}
+
+.footer__links {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 480px) {
+    .footer__links {
+        margin: 0;
+        flex-direction: column;
+    }
+}
+
+.footer__link {
+    padding: 0;
+    align-self: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.footer__link:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
+.footer__link:last-of-type{
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    .footer__link {
+        margin: 0 0 12px 0;
+
+    }
+    .footer__link:last-of-type{
+        margin: 0 0 30px 0;
+    }
+}

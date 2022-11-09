@@ -1,0 +1,10 @@
+.header__logo {
+    min-width: 38px;
+    min-height: 38px;
+    cursor: pointer;
+}
+
+.header__logo:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
