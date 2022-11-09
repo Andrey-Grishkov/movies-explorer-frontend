@@ -173,6 +173,11 @@
     cursor: pointer;
 }
 
+.about-me__github-link:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
 .about-me__foto {
     max-width: 270px;
     min-height: 327px;

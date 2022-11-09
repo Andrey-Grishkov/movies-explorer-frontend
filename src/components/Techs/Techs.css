@@ -159,6 +159,11 @@
     cursor: pointer;
 }
 
+.technology__button:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
 @media screen and (max-width: 768px) {
     .technology__button {
         font-size: 12px;

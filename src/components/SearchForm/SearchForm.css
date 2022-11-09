@@ -63,6 +63,11 @@
     cursor: pointer;
 }
 
+.search-form__search-button:hover {
+    transition: 1s ease-in;
+    opacity: .6;
+}
+
 .search-form__search-image {
     object-fit: fill;
 
