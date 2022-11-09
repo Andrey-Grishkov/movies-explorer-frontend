@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
@@ -12,11 +13,25 @@ import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import { initialMoviesCards } from '../../utils/initialMoviesCards'
 import Login from "../Login/Login";
+import apiMovies from '../../utils/MoviesApi';
+
 
 
 function App() {
 
   const [currentUser, setCurrentUser] = React.useState(null);
+
+  const [moviescards, setMoviesCards] = useState([]);
+
+  useEffect(() => {
+      apiMovies
+          .getMoviesCards()
+          .then((res) => {
+            setMoviesCards(res);
+          })
+          .catch((err) => console.log(`Ошибка: ${err}`));
+    }
+    , []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -29,7 +44,7 @@ function App() {
           </Route>
           <Route exact path="/movies">
             <Header auth={true}/>
-            <Movies cards = {initialMoviesCards}/>
+            <Movies cards = {moviescards}/>
             <Footer />
           </Route>
           <Route exact path="/saved-movies">
