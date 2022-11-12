@@ -13,7 +13,7 @@ function Authorization(props) {
           <p className='authorization__text'>{props.title}</p>
         </div>
       </div>
-      <form>
+      <form onSubmit={props.onSubmit}>
       <ul className='authorization__container'>
         {props.authType === 'register' && (
         <li className='authorization__part-form'>
@@ -26,25 +26,31 @@ function Authorization(props) {
         <li className='authorization__part-form'>
           <p className='authorization__name'>E-mail</p>
           <input className='authorization__input' placeholder='E-mail' type="email" id="email" name="email" minLength="2"
-                 maxLength="30" required/>
+                 maxLength="30"
+                 value={props.valueEmail}
+                 onChange={props.onChangeEmail}
+                 required/>
         </li>
         <p className='authorization__validation-text'>что-то пошло не так...</p>
         <li className='authorization__part-form'>
           <p className='authorization__name'>Пароль</p>
           <input className='authorization__input' placeholder='Пароль' type='password' id="password" name="password"
                  minLength="2"
-                 maxLength="30" required/>
+                 maxLength="30"
+                 value={props.valuePassword}
+                 onChange={props.onChangePassword}
+                 required/>
         </li>
         <p className='authorization__validation-text'>что-то пошло не так...</p>
       </ul>
-      </form>
-      <div className='authorization__confirm'>
-        <button className={`${props.authType === 'register' ? 'authorization__confirm-button' : 'authorization__confirm-button authorization__confirm-button-login'}`} type='submit'>{props.button}</button>
-        <div className='authorization__confirm-container'>
-          <p className='authorization__confirm-text'>{props.text}</p>
-          <a className='authorization__confirm-link' href={props.linkRout}>{props.link}</a>
+        <div className='authorization__confirm'>
+          <button className={`${props.authType === 'register' ? 'authorization__confirm-button' : 'authorization__confirm-button authorization__confirm-button-login'}`} type='submit'>{props.button}</button>
+          <div className='authorization__confirm-container'>
+            <p className='authorization__confirm-text'>{props.text}</p>
+            <a className='authorization__confirm-link' href={props.linkRout}>{props.link}</a>
+          </div>
         </div>
-      </div>
+      </form>
     </section>
   );
 }
