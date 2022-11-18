@@ -60,15 +60,13 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  addUserInfo(userInfo) {
+  addUserInfo(email, name) {
+    console.log(email, name)
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       credentials: "include",
-      body: JSON.stringify({
-        email: userInfo.email,
-        name: userInfo.name,
-      }),
+      body: JSON.stringify({email, name}),
     }).then(this._checkResponse);
   }
 }
@@ -77,6 +75,6 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const api = new Api('https://api.movies.grishkov.nomoredomains.icu', headers);
+const api = new Api('http://localhost:3001', headers);
 
 export default api;

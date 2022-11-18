@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -17,93 +17,144 @@ import apiMovies from '../../utils/MoviesApi';
 import moviesFilter from '../../utils/moviesFilter';
 import InfoTooltip from '../InfoTooltip/InfoTooltip'
 import * as auth from "../../utils/auth";
+// import auth from "../../utils/auth";
 import api from '../../utils/MainApi';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = React.useState(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [moviescards, setMoviesCards] = useState(
     JSON.parse(localStorage.getItem("movies")) || []
   );
   const [infoTooltip, setInfoTooltip] = useState(false);
+  const [infoTooltipStatus, setInfoTooltipStatus] = useState(false);
+  const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
+  const location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
   const [userEmail, setUserEmail] = useState('');
-  const history = useHistory();
+  const [userName, setName] = useState('');
+  const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
+  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
 
-  const handleCheckToken = () => {
-    auth
-      .checkToken()
-      .then((res) => {
-        if (res.ok) {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          history.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleCheckToken = () => {
+  //   auth
+  //     .checkToken()
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.ok) {
+  //         setLoggedIn(true);
+  //         setUserEmail(res.data.email);
+  //         setName(res.data.name);
+  //         history('/movies');
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  //
+  // useEffect(() => {
+  //   handleCheckToken();
+  // }, []);
 
-  useEffect(() => {
-    handleCheckToken();
-  }, []);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history("/");
+  //   }
+  // }, [loggedIn]);
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push("/");
-    }
-  }, [loggedIn]);
 
-  useEffect(() => {
-    if (loggedIn){
-      api
-        .getUserInfo()
-        .then((res) => setCurrentUser(res.message))
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }}, [loggedIn]);
 
   const onRegister = (data) => {
-    auth
-      .register(data)
+    const {email, name, password} = data;
+    auth.
+      register({email, name, password})
       .then((res) => {
+        console.log(res);
         if (res) {
-          setInfoTooltip(true);
           setRegIn(true);
-          history.push('/signin');
+          setInfoTooltipStatus(true);
+          setInfoTooltipMessage('Вы успешно зарегистрированы!');
+
+          setInfoTooltip(true);
+          history('/signin');
         }
       })
       .catch((err) => {
-        setInfoTooltip(true);
         setRegIn(false);
+        setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
+        setInfoTooltipStatus (false);
+        setInfoTooltip(true);
         console.log(`Ошибка: ${err}`);
       });
   };
 
-  const onLogin = (userEmail, password) => {
+  const onLogin = (data) => {
+    const {email, password} = data;
     auth
-      .authorize(userEmail, password)
+      .authorize({email, password})
       .then((res) => {
         if (res) {
+          setInfoTooltipStatus (true);
+          setInfoTooltipMessage('Вы успешно авторизировались!')
+          setInfoTooltip(true);
           setLoggedIn(true);
-          setUserEmail(userEmail);
-          history.push('/');
+          history('/movies');
         }
       })
       .catch((err) => {
+        setInfoTooltipStatus (false);
+        setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
         setInfoTooltip(true);
         console.log(`Ошибка: ${err}`);
       });
   };
 
-  function handleLogExit() {
-    setLoggedIn(false);
-    history.push('/signin');
+  // useEffect(() => {
+  //   Promise.all([api.getUserInfo()])
+  //     .then(([user]) => {
+  //       setLoggedIn(true);
+  //       setCurrentUser({ name: user.name, email: user.email });
+  //     })
+  //     .catch((err) => {
+  //       setLoggedIn(false)
+  //       console.log(err);
+  //     })
+  // }, [])
+
+
+  console.log(currentUser);
+
+  function handleLogout() {
+    auth.logout()
+      .then(() => {
+        setInfoTooltipStatus (true);
+        setInfoTooltipMessage('Вы вышли из аккаунта!')
+        setInfoTooltip(true);
+        setCurrentUser({});
+        setLoggedIn(false);
+        localStorage.clear();
+      })
+      .catch((err) => {
+        setInfoTooltipStatus (false);
+        setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
+        setInfoTooltip(true);
+        console.log(`Ошибка: ${err}`);
+      });
   }
 
 
+
+  // useEffect(() => {
+  //   if (loggedIn){
+  //     api
+  //       .getUserInfo()
+  //       .then((res) => setCurrentUser(res.message))
+  //       .catch((err) => console.log(`Ошибка: ${err}`));
+  //   }}, [loggedIn]);
 
 
   // const [moviescards, setMoviesCards] = useState([]);
@@ -122,6 +173,18 @@ function App() {
   //     }
   //     , []);
 
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          setCurrentUser(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
+
   const handleGetMoviesCards = (request, isSmall, setResult) => {
     setIsLoading(true);
     apiMovies
@@ -138,55 +201,88 @@ function App() {
       });
   };
 
-  const closeAllPopups = () => {
-    setInfoTooltip(false);
+  const handleEditProfileClick = () => {
+    setIsOpenEditProfile(true);
   };
 
+  const closeAllPopups = () => {
+    setInfoTooltip(false);
+    setIsOpenEditProfile(false);
+  };
 
-
-
-
+    const handleUpdateUserInfo = (email, name) => {
+      console.log(email, name);
+    api.addUserInfo(email, name)
+      .then((user) => {
+        setCurrentUser(user);
+        setIsOpenEditProfile(false);
+      })
+      .catch((err) => {
+      setInfoTooltipStatus (false);
+      setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
+      setInfoTooltip(true);
+      console.log(`Ошибка: ${err}`);
+    });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Switch>
-          <Route exact path="/">
-            <Header auth={false}/>
+        {location.pathname === '/' ||
+        location.pathname === '/movies' ||
+        location.pathname === '/saved-movies' ?
+          <Header auth={loggedIn}/> :
+          <></>}
+        <Routes>
+          <Route exact path='/' element={
             <Main />
-            <Footer />
+          }>
           </Route>
-          <Route exact path="/movies">
-            <Header auth={true}/>
+          <Route exact path='/signup' element={
+            <Register onRegister={onRegister}/>
+          }>
+          </Route>
+          <Route exact path='/signin' element={
+            <Login onLogin={onLogin}/>
+          }>
+          </Route>
+          <Route exact path='/movies' element={
             <Movies
               onSearch={handleGetMoviesCards}
               isLoading={isLoading}
               cards={moviescards}
             />
-            <Footer />
+          }>
           </Route>
-          <Route exact path="/saved-movies">
-            <Header auth={true}/>
+          <Route exact path='/saved-movies' element={
             <SavedMovies cards = {initialMoviesCards}/>
-            <Footer />
+          }>
           </Route>
-          <Route exact path="/profile">
-            <Header auth={true}/>
-            <Profile />
+          <Route exact path='/profile' element={
+            <Profile
+              handleLogout={handleLogout}
+              handleUpdateUserInfo={handleUpdateUserInfo}
+              handleEditProfileClick={handleEditProfileClick}
+              isOpenEditProfile={isOpenEditProfile}
+              onClose={closeAllPopups}
+              currentUser={currentUser}
+            />
+          }>
           </Route>
-          <Route exact path="/signin">
-            <Login onLogin={onLogin}/>
-          </Route>
-          <Route exact path="/signup">
-            <Register onRegister={onRegister}/>
-          </Route>
-          <Route path="*">
+          <Route exact path='*' element={
             <NotFindPage />
+          }>
           </Route>
-          </Switch>
+          </Routes>
+          {location.pathname === '/' ||
+          location.pathname === '/movies' ||
+          location.pathname === '/saved-movies' ?
+            <Footer /> :
+            <></>}
         <InfoTooltip
           infoTooltip={infoTooltip}
-          regIn={regIn}
+          infoTooltipStatus={infoTooltipStatus}
+          infoTooltipMessage={infoTooltipMessage}
           onClose={closeAllPopups}
         />
       </div>

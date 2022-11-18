@@ -2,14 +2,13 @@ import React from "react";
 import Authorization from "../Authorization/Authorization";
 
 function Register({ onRegister }) {
-
-  const [email, setUserEmail] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = {email, password};
-    console.log(data);
+    const data = {email, name, password};
     onRegister(data);
   }
 
@@ -20,10 +19,12 @@ function Register({ onRegister }) {
       button='Зарегистрироваться'
       text='Уже зарегистрированы?'
       link='Войти'
-      linkRout='/signup'
+      linkRout='/signin'
       onSubmit={handleSubmit}
-      onChangeEmail={(e) => setUserEmail(e.target.value)}
-      onChangePassword={(e) => setPassword(e.target.value)}
+      setName={setName}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      valueName={name}
       valueEmail={email}
       valuePassword={password}
     />

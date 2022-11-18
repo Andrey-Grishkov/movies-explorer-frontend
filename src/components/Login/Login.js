@@ -3,12 +3,13 @@ import Authorization from '../Authorization/Authorization';
 
 function Login({onLogin}) {
 
-  const [userEmail, setUserEmail] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    onLogin(userEmail, password);
+    const data = {email, password};
+    onLogin(data);
   }
 
   return (
@@ -18,11 +19,11 @@ function Login({onLogin}) {
       button='Войти'
       text='Ещё не зарегистрированы?'
       link='Регистрация'
-      linkRout='/signin'
+      linkRout='/signup'
       onSubmit={handleSubmit}
-      onChangeEmail={(e) => setUserEmail(e.target.value)}
-      onChangePassword={(e) => setPassword(e.target.value)}
-      valueEmail={userEmail}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      valueEmail={email}
       valuePassword={password}
     />
   );

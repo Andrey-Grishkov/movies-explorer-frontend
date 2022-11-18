@@ -3,7 +3,7 @@ import './InfoTooltip.css'
 import yes from '../../images/popup__reg-info-image_yes.svg';
 import no from '../../images/popup__reg-info-image_no.svg';
 
-function InfoTooltip({ infoTooltip, regIn, onClose }) {
+function InfoTooltip({ infoTooltip, infoTooltipStatus, onClose, infoTooltipMessage }) {
 
   return (
     <div className={infoTooltip ? 'popup popup_is-opened' : 'popup'}>
@@ -13,11 +13,9 @@ function InfoTooltip({ infoTooltip, regIn, onClose }) {
           type='button'
           onClick={onClose}
         ></button>
-        <img className='popup__reg-info-image' src={regIn ? yes : no} />
+        <img className='popup__reg-info-image' src={infoTooltipStatus ? yes : no} />
         <p className='popup__reg-info-text'>
-          {regIn
-            ? 'Вы успешно зарегистрировались!'
-            : 'Что-то пошло не так! Попробуйте ещё раз.'}
+          {infoTooltipMessage}
         </p>
       </div>
     </div>

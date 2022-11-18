@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.movies.grishkov.nomoredomains.icu';
+const baseUrl = 'http://localhost:3001';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -7,39 +7,45 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const register = (data) => {
+export const register = ({email, name, password}) => {
+  console.log({email, name, password});
   return fetch(`${baseUrl}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({email, name, password}),
     credentials: "include",
-    body: JSON.stringify(data),
   }).then(checkResponse);
 };
 
-export const authorize = (UserEmail, password) => {
+export const authorize = ({email, password}) => {
   return fetch(`${baseUrl}/signin`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     credentials: "include",
-    body: JSON.stringify({
-      password: password,
-      email: UserEmail,
-    }),
+    body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 };
 
-export const checkToken = () => {
-  return fetch(`${baseUrl}/users/me`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    credentials: "include",
-  }).then(checkResponse);
+// export const checkToken = () => {
+//   return fetch(`${baseUrl}/users/me`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     credentials: "include",
+//   }).then(checkResponse);
+// }
+
+export const logout = () => {
+    return fetch(`${baseUrl}/signout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    }).then(checkResponse);
 };
