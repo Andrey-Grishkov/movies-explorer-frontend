@@ -1,25 +1,17 @@
 import React, {useState, useEffect} from "react";
 import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard'
-import api from "../../utils/MainApi";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox}) => {
+const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, isSearched, handleSearch, windowSize}) => {
 
-  const countBigSize = 12;
-  const countMediumSize = 8;
-  const countSmallSize = 5;
-
-  const [windowSize, setWindowSize] = useState(window.innerWidth < 721 ? countSmallSize : (window.innerWidth < 1109 ? countMediumSize : countBigSize));
   const [filmDuration, setFilmDuration] = useState(checkbox ? 40 : 600)
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 721) {
-      setWindowSize(countSmallSize);
-    } else if (window.innerWidth < 1109) {
-      setWindowSize(countMediumSize);
-    } else {
-      setWindowSize(countBigSize);
-    }});
+  const [infoTooltip, setInfoTooltip] = useState(false);
+
+  const closeAllPopups = () => {
+    setInfoTooltip(false);
+  };
 
   useEffect(() => {
     if(checkbox) {
@@ -29,15 +21,14 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox}) 
     }
   }, [handleSwitchCheckbox]);
 
-  // const handleFilterDuration = () => {
-  //   if (checkbox) {
-  //     setCounter(counter+2)
-  //   } else {
-  //     setCounter(counter+3)
-  //   }
-  // };
+  useEffect(() => {
+    if(!cards.length && isSearched) {
+      setInfoTooltip(true)
+    }
+  }, [handleSearch]);
 
   return (
+    <div>
       <ul className='movies-card-list__container'>
         {cards
           .filter((card) => card.duration<filmDuration)
@@ -46,6 +37,14 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox}) 
             <MoviesCard key={card.id} card={card} flag={flag}/>
           ))}
       </ul>
+  <InfoTooltip
+    infoTooltip={infoTooltip}
+    infoTooltipStatus={false}
+    infoTooltipMessage={'Ничего не найдено'}
+    onClose={closeAllPopups}
+  />
+    </div>
+
   );
 }
 

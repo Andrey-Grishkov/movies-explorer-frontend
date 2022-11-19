@@ -19,10 +19,11 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip'
 import * as auth from "../../utils/auth";
 // import auth from "../../utils/auth";
 import api from '../../utils/MainApi';
+import MoviesFilter from "../../utils/moviesFilter"
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [moviescards, setMoviesCards] = useState(
+  const [moviesCards, setMoviesCards] = useState(
     JSON.parse(localStorage.getItem("movies")) || []
   );
   const [infoTooltip, setInfoTooltip] = useState(false);
@@ -185,14 +186,14 @@ function App() {
       .catch((err) => console.log(err));
   }, [loggedIn]);
 
-  const handleGetMoviesCards = (request, isSmall, setResult) => {
+  const handleGetMoviesCards = (request, setResult) => {
     setIsLoading(true);
     apiMovies
       .getMoviesCards()
       .then((res) => {
         if (res) {
           setMoviesCards(res);
-          setResult(moviesFilter(moviescards, request, isSmall));
+          setResult(MoviesFilter(res, request));
         }
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
@@ -251,7 +252,7 @@ function App() {
             <Movies
               onSearch={handleGetMoviesCards}
               isLoading={isLoading}
-              cards={moviescards}
+              cards={moviesCards}
             />
           }>
           </Route>

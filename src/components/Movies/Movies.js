@@ -1,20 +1,11 @@
 import React from 'react';
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import './Movies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import Preloader from "../Preloader/Preloader";
 import MoviesFilter from "../../utils/moviesFilter"
-import api from "../../utils/MainApi";
-
-
-// const checkbox = document.getElementById('checkbox');
-// checkbox.addEventListener('change', () => {
-//   console.log("Состояние чекбокса изменнено")
-// })
-
-
 
 const Movies = ({cards, isLoading, onSearch}) => {
 
@@ -23,17 +14,33 @@ const Movies = ({cards, isLoading, onSearch}) => {
   const [counter, setCounter] = useState(0);
   const [checkbox, setCheckbox] = useState(false);
 
+  const countBigSize = 12;
+  const countMediumSize = 8;
+  const countSmallSize = 5;
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth < 721 ? countSmallSize :
+    (window.innerWidth < 1109 ? countMediumSize : countBigSize));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 721) {
+      setWindowSize(countSmallSize);
+    } else if (window.innerWidth < 1109) {
+      setWindowSize(countMediumSize);
+    } else {
+      setWindowSize(countBigSize);
+    }});
+
   const handleSwitchCheckbox = () => {
     setCheckbox(!checkbox);
     console.log('переключение чекбокса')
   }
 
-    const handleSearch = (request, isSmall) => {
-    setIsSearched(true);
+    const handleSearch = (request) => {
+      setIsSearched(true);
     if (!cards || !cards.length) {
-      onSearch(request, isSmall, setResult);
+      onSearch(request, setResult);
     } else {
-      setResult(MoviesFilter(cards, request, isSmall));
+      setResult(MoviesFilter(cards, request));
     }
   };
 
@@ -45,19 +52,6 @@ const Movies = ({cards, isLoading, onSearch}) => {
     }
   };
 
-
-  const check = () => {
-    if (document.getElementById("checkbox").checked === true) {
-      console.log('check');
-    } else {
-      console.log('uncheck');
-    }
-  }
-
-  // document.getElementById("checkbox").checked = true;
-
-
-
   return (
     <section className='movies'>
       <SearchForm
@@ -68,22 +62,23 @@ const Movies = ({cards, isLoading, onSearch}) => {
       {isLoading && <Preloader />}
       {!isLoading &&
       (<MoviesCardList
-          cards={cards}
+          cards={result}
           counter={counter}
           checkbox={checkbox}
           handleSwitchCheckbox={handleSwitchCheckbox}
+          isSearched={isSearched}
+          handleSearch={handleSearch}
+          windowSize={windowSize}
           flag='add-favorites-btn'
         />
         )
       }
-      {1 > result.length ?
+      {(checkbox ? <></> : (windowSize+counter < result.length)?
         <ScrollMoviesBtn onClick={handleClick}/> :
-        <></>
+        <></>)
       }
     </section>
   );
 }
 
 export default Movies;
-
-// 1 < result.length ? <ScrollMoviesBtn onClick={handleClick}/> : <></>

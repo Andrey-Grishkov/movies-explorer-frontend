@@ -1,12 +1,7 @@
-const SmallDuration = 40;
+const movieComparer = (card, request) => {
 
-const movieComparer = (movie, request, isSmall) => {
-
-  console.log(movie);
-  console.log('____________');
+  console.log(card);
   console.log(request);
-  console.log('____________');
-  console.log(isSmall);
 
   const {
     country,
@@ -16,18 +11,13 @@ const movieComparer = (movie, request, isSmall) => {
     description,
     nameRU,
     nameEN,
-  } = movie;
+  } = card;
 
   if (country && country.toLowerCase().match(request)) {
     return true;
   }
   if (director && director.toLowerCase().match(request)) {
     return true;
-  }
-  if (isSmall) {
-    if (duration > SmallDuration) {
-      return false;
-    }
   }
   if (year && year.match(request)) {
     return true;
@@ -44,11 +34,9 @@ const movieComparer = (movie, request, isSmall) => {
   return false;
 };
 
-// return !!(nameEN && nameEN.toLowerCase().match(request));
-
-const moviesFilter = (cards, request, isSmall) => {
-  return cards.filter((movie) =>
-    movieComparer(movie, request.toLowerCase(), isSmall)
+const moviesFilter = (cards, request) => {
+  return cards.filter((card) =>
+    movieComparer(card, request.toLowerCase())
   );
 };
 

@@ -7,15 +7,9 @@ import SwitchCheckbox from "../SwitchCheckbox/SwitchCheckbox";
 function SearchForm({ onSearch, checkbox, handleSwitchCheckbox }) {
   const [notFindError, setNotFindError] = useState(false);
   const [request, setRequest] = useState("");
-  const [isSmall, setIsSmall] = useState(false);
 
   const handleSearchInput = (evt) => {
     setRequest(evt.target.value);
-  };
-
-  const handleSwitch = () => {
-    // setIsSmall(!isSmall);
-    console.log('switch');
   };
 
   const handleSubmitSearch = (evt) => {
@@ -24,9 +18,11 @@ function SearchForm({ onSearch, checkbox, handleSwitchCheckbox }) {
       setNotFindError(true);
     } else {
       setNotFindError(false);
-      onSearch(request, isSmall);
+      onSearch(request);
     }
   };
+
+  console.log(request);
 
   return (
     <section className='search-form'>
