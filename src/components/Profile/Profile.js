@@ -35,16 +35,17 @@ function Profile(props) {
       </div>
       <button className='profile__link' onClick={props.handleEditProfileClick}>Редактировать</button>
       <NavLink className='profile__link profile__link_changed-color' to='/signin' onClick={props.handleLogout}>Выйти из аккаунта</NavLink>
-      <EditProfilePopup handleEditProfileClick={props.handleEditProfileClick}
-                        isOpenEditProfile={props.isOpenEditProfile}
-                        onClose={props.onClose}
-                        email={email}
-                        name={name}
-                        handleSubmit={handleSubmit}
-                        setName={setName}
-                        setEmail={setEmail}
-                        valueName={name}
-                        valueEmail={email}
+      <EditProfilePopup
+        handleEditProfileClick={props.handleEditProfileClick}
+        isOpenEditProfile={props.isOpenEditProfile}
+        onClose={props.onClose}
+        email={email}
+        name={name}
+        handleSubmit={handleSubmit}
+        setName={setName}
+        setEmail={setEmail}
+        valueName={name}
+        valueEmail={email}
       />
     </section>
   );

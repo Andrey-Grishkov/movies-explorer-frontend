@@ -1,6 +1,13 @@
 const SmallDuration = 40;
 
 const movieComparer = (movie, request, isSmall) => {
+
+  console.log(movie);
+  console.log('____________');
+  console.log(request);
+  console.log('____________');
+  console.log(isSmall);
+
   const {
     country,
     director,

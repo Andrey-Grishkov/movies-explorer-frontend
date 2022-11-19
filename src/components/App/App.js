@@ -21,8 +21,6 @@ import * as auth from "../../utils/auth";
 import api from '../../utils/MainApi';
 
 function App() {
-
-
   const [isLoading, setIsLoading] = useState(false);
   const [moviescards, setMoviesCards] = useState(
     JSON.parse(localStorage.getItem("movies")) || []
@@ -38,6 +36,8 @@ function App() {
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+
+
 
   // const handleCheckToken = () => {
   //   auth
@@ -230,7 +230,8 @@ function App() {
       <div className='page'>
         {location.pathname === '/' ||
         location.pathname === '/movies' ||
-        location.pathname === '/saved-movies' ?
+        location.pathname === '/saved-movies' ||
+        location.pathname === '/profile'  ?
           <Header auth={loggedIn}/> :
           <></>}
         <Routes>

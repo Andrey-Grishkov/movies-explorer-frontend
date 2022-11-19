@@ -4,7 +4,7 @@ import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import SwitchCheckbox from "../SwitchCheckbox/SwitchCheckbox";
 
-function SearchForm({ onSearch }) {
+function SearchForm({ onSearch, checkbox, handleSwitchCheckbox }) {
   const [notFindError, setNotFindError] = useState(false);
   const [request, setRequest] = useState("");
   const [isSmall, setIsSmall] = useState(false);
@@ -14,7 +14,7 @@ function SearchForm({ onSearch }) {
   };
 
   const handleSwitch = () => {
-    setIsSmall(!isSmall);
+    // setIsSmall(!isSmall);
     console.log('switch');
   };
 
@@ -27,8 +27,6 @@ function SearchForm({ onSearch }) {
       onSearch(request, isSmall);
     }
   };
-
-
 
   return (
     <section className='search-form'>
@@ -53,7 +51,10 @@ function SearchForm({ onSearch }) {
         </p>
       )}
       <div className='search-form__checkbox'>
-        <SwitchCheckbox handleSwitch={handleSwitch}/>
+        <SwitchCheckbox
+          handleSwitchCheckbox={handleSwitchCheckbox}
+          checkbox={checkbox}
+        />
         <p className='search-form__filter-name'>Короткометражки</p>
       </div>
     </section>

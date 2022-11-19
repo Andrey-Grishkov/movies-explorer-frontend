@@ -1,12 +1,14 @@
-import React from "react";
-import "./SwitchCheckbox.css";
+import React from 'react';
+import './SwitchCheckbox.css';
 
-function SwitchCheckbox({handleSwitch}) {
+function SwitchCheckbox({ checkbox, handleSwitchCheckbox }) {
   return (
-        <label className="switch-checkbox__switch">
+        <label className='switch-checkbox__switch'>
           <input
-            type="checkbox"
-            onClick={handleSwitch}
+            type='checkbox'
+            id='checkbox'
+            checked={checkbox ? true : false}
+            onChange={handleSwitchCheckbox}
           />
           <span className="switch-checkbox__slider switch-checkbox__round"></span>
         </label>

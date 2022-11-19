@@ -22,6 +22,7 @@ function EditProfilePopup(props) {
     const validEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(
       inputEmail.value
     );
+
     if (inputEmail.value.length < 1) {
       setErrorEmail(errors.required);
       setDisabledBtnEmail(true);
