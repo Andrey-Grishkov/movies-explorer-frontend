@@ -5,9 +5,9 @@ import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import Preloader from "../Preloader/Preloader";
-import MoviesFilter from "../../utils/moviesFilter"
+import moviesFilter from "../../utils/moviesFilter"
 
-const Movies = ({cards, isLoading, onSearch}) => {
+const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
 
   const [result, setResult] = useState(cards ?? []);
   const [isSearched, setIsSearched] = useState(false);
@@ -40,7 +40,7 @@ const Movies = ({cards, isLoading, onSearch}) => {
     if (!cards || !cards.length) {
       onSearch(request, setResult);
     } else {
-      setResult(MoviesFilter(cards, request));
+      setResult(moviesFilter(cards, request));
     }
   };
 
@@ -69,6 +69,7 @@ const Movies = ({cards, isLoading, onSearch}) => {
           isSearched={isSearched}
           handleSearch={handleSearch}
           windowSize={windowSize}
+          handleAddCard={handleAddCard}
           flag='add-favorites-btn'
         />
         )

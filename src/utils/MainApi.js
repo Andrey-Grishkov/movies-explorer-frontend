@@ -1,4 +1,6 @@
-const beatFilmMovies = 'https://api.nomoreparties.co/beatfilm-movies'
+// const beatFilmMovies = 'https://api.nomoreparties.co/beatfilm-movies'
+const beatFilmMovies = 'https://api.nomoreparties.co/'
+
 
 class Api {
   _url;
@@ -23,8 +25,23 @@ class Api {
     }).then(this._checkResponse);
   }
 
+  // const beatFilmMovies = 'https://api.nomoreparties.co/'
+  // const movieCard = {
+  //   country: card.country,
+  //   director: card.director,
+  //   duration: card.duration,
+  //   year: card.year,
+  //   description: card.description,
+  //   image: `${beatFilmMovies}${card.image.url}`,
+  //   trailerLink: card.trailerLink,
+  //   thumbnail: `${beatFilmMovies}${card.image.formats.thumbnail.url}`,
+  //   movieId: card.id,
+  //   nameRU: card.nameRU,
+  //   nameEN: card.nameEN,
+  // };
+
   handleAddMovieCard(data) {
-    console.log(data);
+
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: this._headers,
@@ -34,7 +51,7 @@ class Api {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: beatFilmMovies+data.image.url,
+        image: `${beatFilmMovies}${data.image.url}`,
         trailerLink: data.trailerLink,
         thumbnail: beatFilmMovies+data.image.formats.thumbnail.url,
         movieId: data.id,

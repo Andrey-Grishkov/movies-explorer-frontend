@@ -22,8 +22,6 @@ function SearchForm({ onSearch, checkbox, handleSwitchCheckbox }) {
     }
   };
 
-  console.log(request);
-
   return (
     <section className='search-form'>
       <form className='search-form__container' onSubmit={handleSubmitSearch} noValidate>

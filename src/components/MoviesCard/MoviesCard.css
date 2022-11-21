@@ -1,6 +1,6 @@
 .movies-card__card {
     background-color: #222222;
-    max-width: 100%;
+    max-width: 364px;
     min-height: 271px;
     display: flex;
     flex-direction: column;
@@ -10,6 +10,7 @@
 @media screen and (max-width: 768px) {
     .movies-card__card {
         min-height: 258px;
+        max-width: 100%;
     }
 }
 

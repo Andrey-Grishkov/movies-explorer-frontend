@@ -3,11 +3,15 @@ import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard'
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, isSearched, handleSearch, windowSize}) => {
+const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, isSearched, handleSearch, windowSize,
+                          handleDeleteCard, handleAddCard,
+                          savedMovies}) => {
 
   const [filmDuration, setFilmDuration] = useState(checkbox ? 40 : 600)
 
   const [infoTooltip, setInfoTooltip] = useState(false);
+
+
 
   const closeAllPopups = () => {
     setInfoTooltip(false);
@@ -34,7 +38,13 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
           .filter((card) => card.duration<filmDuration)
           .slice(0, windowSize+counter)
           .map((card) => (
-            <MoviesCard key={card.id} card={card} flag={flag}/>
+            <MoviesCard
+              key={flag !== 'add-favorites-btn' ? card._id : card.id}
+              card={card}
+              flag={flag}
+              handleDeleteCard={handleDeleteCard}
+              handleAddCard={handleAddCard}
+            />
           ))}
       </ul>
   <InfoTooltip

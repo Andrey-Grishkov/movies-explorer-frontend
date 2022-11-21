@@ -20,9 +20,11 @@ import * as auth from "../../utils/auth";
 // import auth from "../../utils/auth";
 import api from '../../utils/MainApi';
 import MoviesFilter from "../../utils/moviesFilter"
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSaved, setIsLoadingSaved] = useState(false);
   const [moviesCards, setMoviesCards] = useState(
     JSON.parse(localStorage.getItem("movies")) || []
   );
@@ -37,6 +39,7 @@ function App() {
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
 
 
@@ -126,9 +129,6 @@ function App() {
   //     })
   // }, [])
 
-
-  console.log(currentUser);
-
   function handleLogout() {
     auth.logout()
       .then(() => {
@@ -186,6 +186,16 @@ function App() {
       .catch((err) => console.log(err));
   }, [loggedIn]);
 
+  useEffect(() => {
+    api
+      .getMovieCards()
+      .then((res) => {
+        setSavedMovies(res);
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
+
+  //сбор фильмов с сервера фильмов
   const handleGetMoviesCards = (request, setResult) => {
     setIsLoading(true);
     apiMovies
@@ -212,7 +222,6 @@ function App() {
   };
 
     const handleUpdateUserInfo = (email, name) => {
-      console.log(email, name);
     api.addUserInfo(email, name)
       .then((user) => {
         setCurrentUser(user);
@@ -225,6 +234,60 @@ function App() {
       console.log(`Ошибка: ${err}`);
     });
   }
+
+
+//сохраненные фильмы из бэка
+  const handleAddSavedMovieCards = (card) => {
+
+    setIsLoadingSaved(true);
+    api.handleAddMovieCard(card)
+      .then((res) => {
+        if (res) {
+          setSavedMovies((prevState) => [...prevState, res]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      }).finally(() => {
+      setIsLoadingSaved(false);
+    });
+  };
+
+    console.log(savedMovies);
+
+
+
+  // const getSavedMoviesCards = () => {
+  //   api.getMovieCards()
+  //     .then((res) => {
+  //       setSavedMovies(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const [deleted, setDeleted] = useState([]);
+
+  const deleteMovieCard = (findId) => {
+    setDeleted(findId);
+    api.deleteMovieCard(findId)
+      .then((res) => {
+        if (res) {
+          console.log(res);
+          // setSavedMovies(
+          //   savedMovies.filter((card) => {
+          //     return card._id !== findId;
+          //   })
+          // );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  console.log(deleted);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -253,11 +316,17 @@ function App() {
               onSearch={handleGetMoviesCards}
               isLoading={isLoading}
               cards={moviesCards}
+              handleAddCard={handleAddSavedMovieCards}
             />
           }>
           </Route>
           <Route exact path='/saved-movies' element={
-            <SavedMovies cards = {initialMoviesCards}/>
+            <SavedMovies
+              handleDeleteCard={deleteMovieCard}
+              cards={savedMovies}
+              onSearch={handleAddSavedMovieCards}
+              isLoadingSaved={isLoadingSaved}
+            />
           }>
           </Route>
           <Route exact path='/profile' element={
