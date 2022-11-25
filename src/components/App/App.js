@@ -17,6 +17,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip'
 import * as auth from "../../utils/auth";
 import api from '../../utils/MainApi';
 import moviesFilter from "../../utils/moviesFilter";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +68,7 @@ function App() {
           setInfoTooltipMessage('Вы успешно авторизировались!')
           setInfoTooltip(true);
           setLoggedIn(true);
+          localStorage.setItem('LoggedIn', JSON.stringify(true));
           history('/movies');
         }
       })
@@ -245,35 +247,37 @@ function App() {
             <Login onLogin={onLogin}/>
           }>
           </Route>
-          <Route exact path='/movies' element={
-            <Movies
-              cards={JSON.parse(localStorage.getItem('movies')) ? JSON.parse(localStorage.getItem('movies')) : []}
+          <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>
+            <Route exact path='/movies' element={
+              <Movies
+              cards={result}
               onSearch={handleGetMoviesCards}
               isLoading={isLoading}
               handleAddCard={handleAddSavedMovieCards}
               handleDeleteCard={deleteMovieCard}
-            />
-          }>
-          </Route>
-          <Route exact path='/saved-movies' element={
-            <SavedMovies
-              cards={savedMovies}
-              onSearch={handleSavedMoviesSearch}
-              handleDeleteMovieCard={handleDeleteMovieSavedLoc}
-              isLoadingSaved={isLoadingSaved}
-            />
-          }>
-          </Route>
-          <Route exact path='/profile' element={
-            <Profile
-              handleLogout={handleLogout}
-              handleUpdateUserInfo={handleUpdateUserInfo}
-              handleEditProfileClick={handleEditProfileClick}
-              isOpenEditProfile={isOpenEditProfile}
-              onClose={closeAllPopups}
-              currentUser={currentUser}
-            />
-          }>
+              />
+              }>
+            </Route>
+            <Route exact path='/saved-movies' element={
+              <SavedMovies
+                cards={savedMovies}
+                onSearch={handleSavedMoviesSearch}
+                handleDeleteMovieCard={handleDeleteMovieSavedLoc}
+                isLoadingSaved={isLoadingSaved}
+              />
+            }>
+            </Route>
+            <Route exact path='/profile' element={
+              <Profile
+                handleLogout={handleLogout}
+                handleUpdateUserInfo={handleUpdateUserInfo}
+                handleEditProfileClick={handleEditProfileClick}
+                isOpenEditProfile={isOpenEditProfile}
+                onClose={closeAllPopups}
+                currentUser={currentUser}
+              />
+            }>
+            </Route>
           </Route>
           <Route exact path='*' element={
             <NotFindPage />
