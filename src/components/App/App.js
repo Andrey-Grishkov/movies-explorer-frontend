@@ -32,7 +32,6 @@ function App() {
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
-  const [savedFilteredMovies, setSavedFilteredMovies] = useState([]);
 
   const onRegister = (data) => {
     const {email, name, password} = data;
@@ -154,6 +153,8 @@ function App() {
       JSON.parse(localStorage.getItem('movies')) : [])
   }, [])
 
+
+
   // useEffect(() => {
   //   api
   //     .getMovieCards()
@@ -165,7 +166,7 @@ function App() {
 
 
 
-  // const [resultSavedMovies, setResultSavedMovies] = useState([]);
+
 // Поиск фильмов
 
   const handleGetMoviesCards = (request) => {
@@ -187,11 +188,11 @@ function App() {
     api
       .getMovieCards()
       .then((res) => {
-        const FavoritesMovies = [];
+        const findFavoritesMovies = [];
         res.forEach((movie) => {
-          FavoritesMovies.push(movie.movieId)
+          findFavoritesMovies.push(movie.nameRU)
         })
-        localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
+        localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(findFavoritesMovies));
         setSavedMovies(moviesFilter(res, request))
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })

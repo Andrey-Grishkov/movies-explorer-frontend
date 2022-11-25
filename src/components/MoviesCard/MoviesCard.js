@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useState } from 'react';
 import "./MoviesCard.css";
 const beatFilmMovies = 'https://api.nomoreparties.co/'
@@ -14,18 +14,19 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMo
   const [isFavorite, setIsFavorite] =
     useState(flag === 'add-favorites-btn' ? JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).includes(card.nameRU) : false);
 
+
   function handleSaveMovie () {
     if (!isFavorite) {
     handleAddCard(card);
       setIsFavorite(true);
-      const FavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn'));
-      FavoritesMovies.push(card.id)
-      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
+      const addFavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn'));
+      addFavoritesMovies.push(card.nameRU)
+      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(addFavoritesMovies));
     } else {
       handleDeleteCard(card.id);
       setIsFavorite(false);
-      const FavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).filter((item) => item !== card.nameRU);
-      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
+      const delFavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).filter((item) => item !== card.nameRU);
+      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(delFavoritesMovies));
     }
   }
 
@@ -36,8 +37,8 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMo
     localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
   }
 
-  // console.log('***********likedMovies***************')
-  // console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')))
+  console.log('***********likedMovies***************')
+  console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')))
 
   const handleClick = () => {
     window.open(card.trailerLink);
