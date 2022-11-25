@@ -1,95 +1,51 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import "./MoviesCard.css";
 const beatFilmMovies = 'https://api.nomoreparties.co/'
 
-  // /uploads/stones_in_exile_b2f1b8f4b7.jpeg
-
-const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard,
-                      savedMovies}) => {
+const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMovieCard}) => {
   const imageLink = beatFilmMovies + card.image.url;
   const imageLinkSaved = card.image;
   const durationHours = parseInt((card.duration/60));
   const durationMin = card.duration%60;
-  const [saveMovie, setSaveMovie] = useState(false);
-  const [findId, setFindId] = useState(flag !== 'add-favorites-btn' ? card._id : card.id);
 
 
 
+  const [isFavorite, setIsFavorite] =
+    useState(flag === 'add-favorites-btn' ? JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).includes(card.nameRU) : false);
 
-
-  // const handleSaveMovie = () => {
-  //   if (!saveMovie && flag === 'add-favorites-btn') {
-  //     return setSaveMovie(true);
-  //   }
-  //   return setSaveMovie(false);
-  // };
-
-  // const checkMovie = (card, savedMovies) => {
-  //   let findId = "";
-  //   savedMovies.forEach((item) => {
-  //     if (item.movieId === card.movieId) {
-  //       findId = item._id;
-  //     }
-  //   });
-  //   return findId;
-  // }
-  //
-  // useEffect(() => {
-  //   if (flag === "add-favorites-btn") {
-  //     setFindId(checkMovie(card, savedMovies));
-  //   }
-  // }, [savedMovies, card, flag]);
-
-
-  // const handleSaveMovie = (evt) => {
-  //   evt.stopPropagation();
-  //
-  //   if (!saveMovie && flag === 'add-favorites-btn') {
-  //     setcardTest(card);
-  //     handleAddCard(card);
-  //     setSaveMovie(true);
-  //   } else {
-  //     handleDeleteCard(findId);
-  //     setSaveMovie(false);
-  //   }
-  // };
-
-  function handleSaveMovie (evt) {
-    evt.stopPropagation();
-
-    if (!saveMovie && flag === 'add-favorites-btn') {
-      handleAddCard(card);
-      setSaveMovie(true);
+  function handleSaveMovie () {
+    if (!isFavorite) {
+    handleAddCard(card);
+      setIsFavorite(true);
+      const FavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn'));
+      FavoritesMovies.push(card.id)
+      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
     } else {
-      handleDeleteCard(findId);
-      setSaveMovie(false);
+      handleDeleteCard(card.id);
+      setIsFavorite(false);
+      const FavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).filter((item) => item !== card.nameRU);
+      localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
     }
-  };
+  }
 
+  const handleDeleteSavedCard = () => {
+    handleDeleteMovieCard(card._id);
+    setIsFavorite(false);
+    const FavoritesMovies = JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).filter((item) => item !== card.nameRU)
+    localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
+  }
 
-  // const movieCard = {
-  //   country: cardTest.country,
-  //   director: cardTest.director,
-  //   duration: cardTest.duration,
-  //   year: cardTest.year,
-  //   description: cardTest.description,
-  //   image: `https://api.nomoreparties.co/${cardTest.image.url}`,
-  //   trailerLink: cardTest.trailerLink,
-  //   thumbnail: `https://api.nomoreparties.co/${cardTest.image.formats.thumbnail}`,
-  //   movieId: cardTest.id,
-  //   nameRU: cardTest.nameRU,
-  //   nameEN: cardTest.nameEN,
-  // }
-
-
-
-
-
+  // console.log('***********likedMovies***************')
+  // console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')))
 
   const handleClick = () => {
     window.open(card.trailerLink);
   };
+
+  // console.log('***********Card***************')
+  // console.log(card)
+  // console.log('************************************')
 
 
 
@@ -102,14 +58,16 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard,
           </div>
           {
             flag === 'add-favorites-btn' ?
-              <button className={`movies-card__${flag} movies-card__${flag}_${saveMovie ? 'active' : ''}`}
+              <button className={`movies-card__${flag} movies-card__${flag}_${isFavorite ? 'active' : ''}`}
                        type='button'
                        onClick={handleSaveMovie}
                       >
-              </button> :
+              </button>
+              :
               <button className={`movies-card__${flag}`}
                        type='button'
-                       onClick={handleDeleteCard}>
+                       onClick={handleDeleteSavedCard}
+              >
               </button>
           }
         </div>

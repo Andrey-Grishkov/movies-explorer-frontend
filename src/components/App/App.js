@@ -11,73 +11,35 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Movies from '../Movies/Movies';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
-import { initialMoviesCards } from '../../utils/initialMoviesCards'
 import Login from '../Login/Login';
 import apiMovies from '../../utils/MoviesApi';
-import moviesFilter from '../../utils/moviesFilter';
 import InfoTooltip from '../InfoTooltip/InfoTooltip'
 import * as auth from "../../utils/auth";
-// import auth from "../../utils/auth";
 import api from '../../utils/MainApi';
-import MoviesFilter from "../../utils/moviesFilter"
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import moviesFilter from "../../utils/moviesFilter";
+
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingSaved, setIsLoadingSaved] = useState(false);
-  const [moviesCards, setMoviesCards] = useState(
-    JSON.parse(localStorage.getItem("movies")) || []
-  );
   const [infoTooltip, setInfoTooltip] = useState(false);
   const [infoTooltipStatus, setInfoTooltipStatus] = useState(false);
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [userEmail, setUserEmail] = useState('');
-  const [userName, setName] = useState('');
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
-
-
-
-  // const handleCheckToken = () => {
-  //   auth
-  //     .checkToken()
-  //     .then((res) => {
-  //       console.log(res);
-  //       if (res.ok) {
-  //         setLoggedIn(true);
-  //         setUserEmail(res.data.email);
-  //         setName(res.data.name);
-  //         history('/movies');
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  //
-  // useEffect(() => {
-  //   handleCheckToken();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     history("/");
-  //   }
-  // }, [loggedIn]);
-
-
+  const [savedFilteredMovies, setSavedFilteredMovies] = useState([]);
 
   const onRegister = (data) => {
     const {email, name, password} = data;
     auth.
       register({email, name, password})
       .then((res) => {
-        console.log(res);
+        console.log(res, 'Данные регистрации');
         if (res) {
           setRegIn(true);
           setInfoTooltipStatus(true);
@@ -117,18 +79,6 @@ function App() {
       });
   };
 
-  // useEffect(() => {
-  //   Promise.all([api.getUserInfo()])
-  //     .then(([user]) => {
-  //       setLoggedIn(true);
-  //       setCurrentUser({ name: user.name, email: user.email });
-  //     })
-  //     .catch((err) => {
-  //       setLoggedIn(false)
-  //       console.log(err);
-  //     })
-  // }, [])
-
   function handleLogout() {
     auth.logout()
       .then(() => {
@@ -138,6 +88,7 @@ function App() {
         setCurrentUser({});
         setLoggedIn(false);
         localStorage.clear();
+        setSavedMovies([]);
       })
       .catch((err) => {
         setInfoTooltipStatus (false);
@@ -146,33 +97,6 @@ function App() {
         console.log(`Ошибка: ${err}`);
       });
   }
-
-
-
-  // useEffect(() => {
-  //   if (loggedIn){
-  //     api
-  //       .getUserInfo()
-  //       .then((res) => setCurrentUser(res.message))
-  //       .catch((err) => console.log(`Ошибка: ${err}`));
-  //   }}, [loggedIn]);
-
-
-  // const [moviescards, setMoviesCards] = useState([]);
-
-  // useEffect(() => {
-  //     apiMovies
-  //         .getMoviesCards()
-  //         .then((res) => {
-  //           setMoviesCards(res);
-  //           setIsLoading(true);
-  //         })
-  //         .catch((err) => console.log(`Ошибка: ${err}`))
-  //         .finally(() => {
-  //           setIsLoading(false);
-  //         });
-  //     }
-  //     , []);
 
   useEffect(() => {
     api
@@ -186,32 +110,6 @@ function App() {
       .catch((err) => console.log(err));
   }, [loggedIn]);
 
-  useEffect(() => {
-    api
-      .getMovieCards()
-      .then((res) => {
-        setSavedMovies(res);
-      })
-      .catch((err) => console.log(err));
-  }, [loggedIn]);
-
-  //сбор фильмов с сервера фильмов
-  const handleGetMoviesCards = (request, setResult) => {
-    setIsLoading(true);
-    apiMovies
-      .getMoviesCards()
-      .then((res) => {
-        if (res) {
-          setMoviesCards(res);
-          setResult(MoviesFilter(res, request));
-        }
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`))
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
   const handleEditProfileClick = () => {
     setIsOpenEditProfile(true);
   };
@@ -221,30 +119,113 @@ function App() {
     setIsOpenEditProfile(false);
   };
 
-    const handleUpdateUserInfo = (email, name) => {
+  const handleUpdateUserInfo = (email, name) => {
     api.addUserInfo(email, name)
       .then((user) => {
         setCurrentUser(user);
         setIsOpenEditProfile(false);
       })
       .catch((err) => {
-      setInfoTooltipStatus (false);
-      setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
-      setInfoTooltip(true);
-      console.log(`Ошибка: ${err}`);
-    });
+        setInfoTooltipStatus (false);
+        setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
+        setInfoTooltip(true);
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+  //____________________________________________________________
+  //_______________ФИЛЬМЫ____________________
+  //____________________________________________________________
+
+
+
+
+
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [result, setResult] = useState([]);
+
+
+  useEffect(() => {
+    setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')) ?
+      JSON.parse(localStorage.getItem('savedMovies')) : [])
+  }, [])
+
+  useEffect(() => {
+    setResult(JSON.parse(localStorage.getItem('movies')) ?
+      JSON.parse(localStorage.getItem('movies')) : [])
+  }, [])
+
+  // useEffect(() => {
+  //   api
+  //     .getMovieCards()
+  //     .then((res) => {
+  //       setSavedMovies(res);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [loggedIn]);
+
+
+
+  // const [resultSavedMovies, setResultSavedMovies] = useState([]);
+// Поиск фильмов
+
+  const handleGetMoviesCards = (request) => {
+    setIsLoading(true);
+    //поиск фильмов с сервера фильмов
+    apiMovies
+      .getMoviesCards()
+      .then((res) => {
+        setResult(moviesFilter(res, request))
+        // Записываем полученные фильмы в локал сторидж
+        localStorage.setItem('movies', JSON.stringify(result));
+
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => {
+        setIsLoading(false);
+      });
+    //поиск фильмов с бэка
+    api
+      .getMovieCards()
+      .then((res) => {
+        const FavoritesMovies = [];
+        res.forEach((movie) => {
+          FavoritesMovies.push(movie.movieId)
+        })
+        localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
+        setSavedMovies(moviesFilter(res, request))
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+      })
+  };
+
+console.log('_____________________App________________________')
+  console.log(JSON.parse(localStorage.getItem('movies')));
+  console.log(JSON.parse(localStorage.getItem('savedMovies')));
+  console.log('______________________________________________________')
+
+//Поиск сохраненных фильмов
+
+  function handleSavedMoviesSearch() {
+    setIsLoading(true);
+    api.getMovieCards()
+      .then((res) => {
+        localStorage.setItem('savedMovies', JSON.stringify(res));
+        setSavedMovies(res);
+      })
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }
 
 
 //сохраненные фильмы из бэка
+
   const handleAddSavedMovieCards = (card) => {
 
     setIsLoadingSaved(true);
     api.handleAddMovieCard(card)
       .then((res) => {
-        if (res) {
-          setSavedMovies((prevState) => [...prevState, res]);
-        }
+        const savedAddMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        savedAddMovies.push(res)
+        localStorage.setItem('savedMovies', JSON.stringify(savedAddMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -253,41 +234,35 @@ function App() {
     });
   };
 
-    console.log(savedMovies);
+  //удаление фильмов на странице всех фильмов
+  const deleteMovieCard = (cardId) => {
 
+    JSON.parse(localStorage.getItem('savedMovies')).forEach((movie) => {
+      if (movie.movieId === cardId) {
+        api.deleteMovieCard(movie._id)
+          .then(() => {
+            const savedDeleteMovies = JSON.parse(localStorage.getItem('savedMovies')).filter((movie) => !(movie.movieId === cardId))
+            localStorage.setItem('savedMovies', JSON.stringify(savedDeleteMovies));
+            setSavedMovies(savedDeleteMovies);
+          })
+          .catch(err => console.log(err));
+      }
+    })
+  }
 
-
-  // const getSavedMoviesCards = () => {
-  //   api.getMovieCards()
-  //     .then((res) => {
-  //       setSavedMovies(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  const [deleted, setDeleted] = useState([]);
-
-  const deleteMovieCard = (findId) => {
-    setDeleted(findId);
-    api.deleteMovieCard(findId)
-      .then((res) => {
-        if (res) {
-          console.log(res);
-          // setSavedMovies(
-          //   savedMovies.filter((card) => {
-          //     return card._id !== findId;
-          //   })
-          // );
-        }
-      })
+  //удаление фильмов на странице сохраненных фильмов
+    const handleDeleteMovieSavedLoc = (cardId) => {
+      api.deleteMovieCard(cardId)
+        .then(() => {
+          const savedRemoveMovies = JSON.parse(localStorage.getItem('savedMovies'))
+            .filter((item) => item._id !== cardId);
+          localStorage.setItem('savedMovies', JSON.stringify(savedRemoveMovies));
+          setSavedMovies(savedRemoveMovies)
+    })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  console.log(deleted);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -312,22 +287,56 @@ function App() {
           }>
           </Route>
           <Route exact path='/movies' element={
+//_________________________________________________________________
+//______________________ФИЛЬМЫ роут________________________________
+//_________________________________________________________________
             <Movies
+
+              //берем фильмы сервера фильмов из локал сториджа
+              // cards={result}
+
+              cards={JSON.parse(localStorage.getItem('movies')) ? JSON.parse(localStorage.getItem('movies')) : []}
               onSearch={handleGetMoviesCards}
               isLoading={isLoading}
-              cards={moviesCards}
               handleAddCard={handleAddSavedMovieCards}
+              handleDeleteCard={deleteMovieCard}
             />
           }>
           </Route>
+
+//_________________________________________________________________
+//______________________СОХРАНЕННЫЕ ФИЛЬМЫ роут____________________
+//_________________________________________________________________
+
           <Route exact path='/saved-movies' element={
             <SavedMovies
-              handleDeleteCard={deleteMovieCard}
-              cards={savedMovies}
-              onSearch={handleAddSavedMovieCards}
+              //Берем сохраненные фильмы с сервера бэка из локал сториджа
+              cards={JSON.parse(localStorage.getItem('savedMovies')) ?
+                JSON.parse(localStorage.getItem('savedMovies')) : []}
+              onSearch={handleSavedMoviesSearch}
+              handleDeleteMovieCard={handleDeleteMovieSavedLoc}
               isLoadingSaved={isLoadingSaved}
             />
           }>
+//_____________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </Route>
           <Route exact path='/profile' element={
             <Profile

@@ -4,7 +4,7 @@ import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import SwitchCheckbox from "../SwitchCheckbox/SwitchCheckbox";
 
-function SearchForm({ onSearch, checkbox, handleSwitchCheckbox }) {
+function SearchForm({ onSearch, checkbox, handleSwitchCheckbox}) {
   const [notFindError, setNotFindError] = useState(false);
   const [request, setRequest] = useState("");
 

@@ -7,12 +7,15 @@ import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import Preloader from "../Preloader/Preloader";
 import moviesFilter from "../../utils/moviesFilter"
 
-const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
+const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) => {
 
-  const [result, setResult] = useState(cards ?? []);
+  // const [result, setResult] = useState(cards ?? []);
   const [isSearched, setIsSearched] = useState(false);
   const [counter, setCounter] = useState(0);
   const [checkbox, setCheckbox] = useState(false);
+
+  // console.log(result, 9999);
+
 
   const countBigSize = 12;
   const countMediumSize = 8;
@@ -37,11 +40,14 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
 
     const handleSearch = (request) => {
       setIsSearched(true);
-    if (!cards || !cards.length) {
-      onSearch(request, setResult);
-    } else {
-      setResult(moviesFilter(cards, request));
-    }
+      onSearch(request);
+
+
+    // if (!cards || !cards.length) {
+    //   onSearch(request, setResult);
+    // } else {
+    //   setResult(moviesFilter(cards, request));
+    // }
   };
 
   const handleClick = () => {
@@ -51,6 +57,10 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
       setCounter(counter+3)
     }
   };
+
+  // console.log('***********Movies***************')
+  // console.log(result)
+  // console.log('************************************')
 
   return (
     <section className='movies'>
@@ -62,7 +72,7 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
       {isLoading && <Preloader />}
       {!isLoading &&
       (<MoviesCardList
-          cards={result}
+          cards={cards}
           counter={counter}
           checkbox={checkbox}
           handleSwitchCheckbox={handleSwitchCheckbox}
@@ -71,10 +81,11 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard}) => {
           windowSize={windowSize}
           handleAddCard={handleAddCard}
           flag='add-favorites-btn'
+          handleDeleteCard={handleDeleteCard}
         />
         )
       }
-      {(checkbox ? <></> : (windowSize+counter < result.length)?
+      {(checkbox ? <></> : (windowSize+counter < cards.length)?
         <ScrollMoviesBtn onClick={handleClick}/> :
         <></>)
       }

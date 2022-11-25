@@ -2,12 +2,10 @@ import React, {useState} from 'react';
 import './SavedMovies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
-import Preloader from "../Preloader/Preloader";
 import moviesFilter from "../../utils/moviesFilter";
 
-const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteCard}) => {
-  const [resultSaved, setResultSaved] = useState(cards ?? []);
+const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) => {
+  // const [resultSaved, setResultSaved] = useState(cards ?? []);
   const [isSearchedSaved, setIsSearchedSaved] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -35,11 +33,14 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteCard}) => {
 
   const handleSearch = (request) => {
     setIsSearchedSaved(true);
-    if (!cards || !cards.length) {
-      onSearch(request, setResultSaved);
-    } else {
-      setResultSaved(moviesFilter(cards, request));
-    }
+    onSearch(request);
+
+    // setIsSearchedSaved(true);
+    // if (!cards || !cards.length) {
+    //   onSearch(request);
+    // } else {
+    //   setResultSaved(moviesFilter(cards, request));
+    // }
   };
 
   return (
@@ -51,15 +52,15 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteCard}) => {
       />
       {!isLoadingSaved &&
       (   <MoviesCardList
-          cards={resultSaved}
+          cards={cards}
           flag='delete-favorites-btn'
           checkbox={checkbox}
           handleSwitchCheckbox={handleSwitchCheckbox}
           isSearched={isSearchedSaved}
           handleSearch={handleSearch}
           windowSize={windowSize}
-          handleDeleteCard={handleDeleteCard}
           counter={counter}
+          handleDeleteMovieCard={handleDeleteMovieCard}
         />
       )
       }
@@ -68,13 +69,3 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteCard}) => {
 }
 
 export default SavedMovies;
-
-// cards={result}
-// counter={counter}
-// checkbox={checkbox}
-// handleSwitchCheckbox={handleSwitchCheckbox}
-// isSearched={isSearched}
-// handleSearch={handleSearch}
-// windowSize={windowSize}
-// handleAddCard={handleAddCard}
-// flag='add-favorites-btn'

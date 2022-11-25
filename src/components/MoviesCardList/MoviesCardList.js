@@ -4,14 +4,10 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, isSearched, handleSearch, windowSize,
-                          handleDeleteCard, handleAddCard,
-                          savedMovies}) => {
+                          handleDeleteCard, handleAddCard, handleDeleteMovieCard}) => {
 
   const [filmDuration, setFilmDuration] = useState(checkbox ? 40 : 600)
-
   const [infoTooltip, setInfoTooltip] = useState(false);
-
-
 
   const closeAllPopups = () => {
     setInfoTooltip(false);
@@ -31,21 +27,41 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
     }
   }, [handleSearch]);
 
+
+  console.log('***********CardList***************')
+  console.log(cards)
+  console.log('************************************')
+
+
   return (
     <div>
       <ul className='movies-card-list__container'>
-        {cards
-          .filter((card) => card.duration<filmDuration)
+        {flag === 'add-favorites-btn' ?
+          (cards
+          .filter((savedCard) => savedCard.duration<filmDuration)
           .slice(0, windowSize+counter)
-          .map((card) => (
+          .map((savedCard) => (
             <MoviesCard
-              key={flag !== 'add-favorites-btn' ? card._id : card.id}
-              card={card}
+              key={flag !== 'add-favorites-btn' ? savedCard._id : savedCard.id}
+              card={savedCard}
               flag={flag}
               handleDeleteCard={handleDeleteCard}
               handleAddCard={handleAddCard}
             />
-          ))}
+          ))) : (JSON.parse(localStorage.getItem('savedMovies'))
+            .filter((savedCard) => savedCard.duration<filmDuration)
+            .slice(0, windowSize+counter)
+            .map((savedCard) => (
+              <MoviesCard
+                key={flag !== 'add-favorites-btn' ? savedCard._id : savedCard.id}
+                card={savedCard}
+                flag={flag}
+                handleDeleteCard={handleDeleteCard}
+                handleAddCard={handleAddCard}
+                handleDeleteMovieCard={handleDeleteMovieCard}
+              />
+            )))
+        }
       </ul>
   <InfoTooltip
     infoTooltip={infoTooltip}
@@ -54,7 +70,6 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
     onClose={closeAllPopups}
   />
     </div>
-
   );
 }
 
