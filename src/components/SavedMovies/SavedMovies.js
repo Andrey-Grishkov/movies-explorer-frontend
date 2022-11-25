@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import './SavedMovies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import moviesFilter from "../../utils/moviesFilter";
+import Preloader from "../Preloader/Preloader";
 
 const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) => {
-  // const [resultSaved, setResultSaved] = useState(cards ?? []);
   const [isSearchedSaved, setIsSearchedSaved] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -34,13 +33,6 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) 
   const handleSearch = (request) => {
     setIsSearchedSaved(true);
     onSearch(request);
-
-    // setIsSearchedSaved(true);
-    // if (!cards || !cards.length) {
-    //   onSearch(request);
-    // } else {
-    //   setResultSaved(moviesFilter(cards, request));
-    // }
   };
 
   return (
@@ -50,6 +42,7 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) 
         handleSwitchCheckbox={handleSwitchCheckbox}
         checkbox={checkbox}
       />
+      {isLoadingSaved && <Preloader />}
       {!isLoadingSaved &&
       (   <MoviesCardList
           cards={cards}

@@ -5,18 +5,12 @@ import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import Preloader from "../Preloader/Preloader";
-import moviesFilter from "../../utils/moviesFilter"
 
 const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) => {
 
-  // const [result, setResult] = useState(cards ?? []);
   const [isSearched, setIsSearched] = useState(false);
   const [counter, setCounter] = useState(0);
   const [checkbox, setCheckbox] = useState(false);
-
-  // console.log(result, 9999);
-
-
   const countBigSize = 12;
   const countMediumSize = 8;
   const countSmallSize = 5;
@@ -41,13 +35,6 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
     const handleSearch = (request) => {
       setIsSearched(true);
       onSearch(request);
-
-
-    // if (!cards || !cards.length) {
-    //   onSearch(request, setResult);
-    // } else {
-    //   setResult(moviesFilter(cards, request));
-    // }
   };
 
   const handleClick = () => {
@@ -57,10 +44,6 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
       setCounter(counter+3)
     }
   };
-
-  // console.log('***********Movies***************')
-  // console.log(result)
-  // console.log('************************************')
 
   return (
     <section className='movies'>

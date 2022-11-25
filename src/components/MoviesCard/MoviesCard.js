@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useState } from 'react';
 import "./MoviesCard.css";
 const beatFilmMovies = 'https://api.nomoreparties.co/'
@@ -9,11 +9,8 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMo
   const durationHours = parseInt((card.duration/60));
   const durationMin = card.duration%60;
 
-
-
   const [isFavorite, setIsFavorite] =
     useState(flag === 'add-favorites-btn' ? JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).includes(card.nameRU) : false);
-
 
   function handleSaveMovie () {
     if (!isFavorite) {
@@ -37,18 +34,9 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMo
     localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(FavoritesMovies));
   }
 
-  console.log('***********likedMovies***************')
-  console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')))
-
   const handleClick = () => {
     window.open(card.trailerLink);
   };
-
-  // console.log('***********Card***************')
-  // console.log(card)
-  // console.log('************************************')
-
-
 
   return (
       <li className='movies-card__card'>

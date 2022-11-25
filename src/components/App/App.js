@@ -198,22 +198,22 @@ function App() {
       })
   };
 
-console.log('_____________________App________________________')
-  console.log(JSON.parse(localStorage.getItem('movies')));
-  console.log(JSON.parse(localStorage.getItem('savedMovies')));
-  console.log('______________________________________________________')
+// console.log('_____________________App________________________')
+//   console.log(JSON.parse(localStorage.getItem('movies')));
+//   console.log(JSON.parse(localStorage.getItem('savedMovies')));
+//   console.log('______________________________________________________')
 
 //Поиск сохраненных фильмов
 
-  function handleSavedMoviesSearch() {
-    setIsLoading(true);
+  function handleSavedMoviesSearch(request) {
+    setIsLoadingSaved(true);
     api.getMovieCards()
       .then((res) => {
-        localStorage.setItem('savedMovies', JSON.stringify(res));
-        setSavedMovies(res);
+        setSavedMovies(moviesFilter(res, request))
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
       .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoadingSaved(false));
   }
 
 
@@ -310,10 +310,18 @@ console.log('_____________________App________________________')
 //_________________________________________________________________
 
           <Route exact path='/saved-movies' element={
+
+
             <SavedMovies
               //Берем сохраненные фильмы с сервера бэка из локал сториджа
-              cards={JSON.parse(localStorage.getItem('savedMovies')) ?
-                JSON.parse(localStorage.getItem('savedMovies')) : []}
+
+              cards={savedMovies}
+
+              // cards={JSON.parse(localStorage.getItem('savedMovies')) ?
+              //   JSON.parse(localStorage.getItem('savedMovies')) : []}
+              //
+
+
               onSearch={handleSavedMoviesSearch}
               handleDeleteMovieCard={handleDeleteMovieSavedLoc}
               isLoadingSaved={isLoadingSaved}

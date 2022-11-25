@@ -27,12 +27,6 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
     }
   }, [handleSearch]);
 
-
-  console.log('***********CardList***************')
-  console.log(cards)
-  console.log('************************************')
-
-
   return (
     <div>
       <ul className='movies-card-list__container'>
