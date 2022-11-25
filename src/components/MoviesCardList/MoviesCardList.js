@@ -42,7 +42,8 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
               handleDeleteCard={handleDeleteCard}
               handleAddCard={handleAddCard}
             />
-          ))) : (JSON.parse(localStorage.getItem('savedMovies'))
+          ))) : (
+            cards
             .filter((savedCard) => savedCard.duration<filmDuration)
             .slice(0, windowSize+counter)
             .map((savedCard) => (

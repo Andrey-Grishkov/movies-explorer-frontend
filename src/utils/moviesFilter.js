@@ -1,8 +1,5 @@
 const movieComparer = (card, request) => {
 
-  console.log(card);
-  console.log(request);
-
   const {
     country,
     director,

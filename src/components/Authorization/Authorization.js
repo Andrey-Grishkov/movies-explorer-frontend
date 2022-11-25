@@ -41,7 +41,6 @@ function Authorization(props) {
 
   function handleErrorName(e) {
     const inputName = e.target;
-    const validName = /^[a-zA-Zа-яА-Я- ]+$/.test(inputName.value);
 
     if (inputName.value.length < 1) {
       setErrorName(errors.required);
@@ -51,9 +50,6 @@ function Authorization(props) {
       setDisabledBtnName(true);
     } else if (inputName.value.length > 30) {
       setErrorName(errors.maxLength);
-      setDisabledBtnName(true);
-    } else if (!validName) {
-      setErrorName(errors.name);
       setDisabledBtnName(true);
     } else {
       setErrorName('');
