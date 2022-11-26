@@ -1,4 +1,8 @@
-const baseUrl = 'http://localhost:3001';
+import { baseUrl } from '../utils/constants';
+
+// const baseUrl = 'http://localhost:3001';
+
+// const baseUrl = 'https://api.movies.grishkov.nomoredomains.icu';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -30,16 +34,6 @@ export const authorize = ({email, password}) => {
   }).then(checkResponse);
 };
 
-// export const checkToken = () => {
-//   return fetch(`${baseUrl}/users/me`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     credentials: "include",
-//   }).then(checkResponse);
-// }
-
 export const logout = () => {
     return fetch(`${baseUrl}/signout`, {
       method: 'POST',
@@ -48,4 +42,15 @@ export const logout = () => {
       },
       credentials: 'include',
     }).then(checkResponse);
+};
+
+export const checkToken = () => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: "include",
+  }).then(checkResponse);
 };

@@ -1,8 +1,8 @@
 import React from "react";
-import { Navigate, Outlet} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = () => {
-  return (localStorage.getItem('LoggedIn')) ? <Outlet/> : <Navigate to="/signin"/>
+function ProtectedRoute({children, loggedIn}) {
+  return loggedIn ? children : <Navigate to="/signin"/>
 }
 
 export default ProtectedRoute;

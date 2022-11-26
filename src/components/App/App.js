@@ -44,7 +44,6 @@ function App() {
           setRegIn(true);
           setInfoTooltipStatus(true);
           setInfoTooltipMessage('Вы успешно зарегистрированы!');
-
           setInfoTooltip(true);
           history('/signin');
         }
@@ -65,9 +64,11 @@ function App() {
       .then((res) => {
         if (res) {
           setInfoTooltipStatus (true);
-          setInfoTooltipMessage('Вы успешно авторизировались!')
+          setInfoTooltipMessage('Вы успешно авторизировались!');
+          console.log(res);
           setInfoTooltip(true);
           setLoggedIn(true);
+          setCurrentUser(res);
           localStorage.setItem('LoggedIn', JSON.stringify(true));
           history('/movies');
         }
@@ -79,6 +80,74 @@ function App() {
         console.log(`Ошибка: ${err}`);
       });
   };
+
+  console.log(currentUser, 909);
+  console.log(loggedIn, 702);
+
+  // const handleCheckToken = () => {
+  //   auth
+  //     .checkToken()
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         setLoggedIn(true);
+  //         setCurrentUser(res);
+  //         history(location);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  //
+  // useEffect(() => {
+  //   handleCheckToken();
+  // }, []);
+
+  // useEffect(() => {
+  //   api
+  //     .getUserInfo()
+  //     .then((res) => {
+  //       if (res) {
+  //         setLoggedIn(true);
+  //         setCurrentUser(res);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [loggedIn]);
+
+  useEffect(() => {
+    Promise.all([api.getUserInfo()])
+      .then(([user]) => {
+        setLoggedIn(true);
+        setCurrentUser(user);
+        history(location)
+      })
+      .catch((err) => {
+        setLoggedIn(false)
+        console.log(err);
+      })
+  }, [])
+
+
+
+  // useEffect(() => {
+  //   api.getUserInfo()
+  //     .then((user) => {
+  //       setLoggedIn(true);
+  //       // localStorage.setItem('location', sessionStorage)
+  //       history.push(location);
+  //       setCurrentUser(user);
+  //     })
+  //     .catch((err) => {
+  //       setLoggedIn(false);
+  //       localStorage.clear();
+  //       // history('/');
+  //       setCurrentUser({});
+  //       setResult([])
+  //       setSavedMovies([])
+  //     });
+  // }, [history]);
+
 
   function handleLogout() {
     auth.logout()
@@ -98,18 +167,6 @@ function App() {
         console.log(`Ошибка: ${err}`);
       });
   }
-
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          setCurrentUser(res);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [loggedIn]);
 
   const handleEditProfileClick = () => {
     setIsOpenEditProfile(true);
@@ -247,27 +304,31 @@ function App() {
             <Login onLogin={onLogin}/>
           }>
           </Route>
-          <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>
+
             <Route exact path='/movies' element={
-              <Movies
-              cards={result}
-              onSearch={handleGetMoviesCards}
-              isLoading={isLoading}
-              handleAddCard={handleAddSavedMovieCards}
-              handleDeleteCard={deleteMovieCard}
-              />
-              }>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Movies
+                 cards={result}
+                 onSearch={handleGetMoviesCards}
+                 isLoading={isLoading}
+                 handleAddCard={handleAddSavedMovieCards}
+                 handleDeleteCard={deleteMovieCard}
+                />
+              </ProtectedRoute>}>
             </Route>
             <Route exact path='/saved-movies' element={
+              <ProtectedRoute loggedIn={loggedIn}>
               <SavedMovies
                 cards={savedMovies}
                 onSearch={handleSavedMoviesSearch}
                 handleDeleteMovieCard={handleDeleteMovieSavedLoc}
                 isLoadingSaved={isLoadingSaved}
               />
+              </ProtectedRoute>
             }>
             </Route>
             <Route exact path='/profile' element={
+              <ProtectedRoute loggedIn={loggedIn}>
               <Profile
                 handleLogout={handleLogout}
                 handleUpdateUserInfo={handleUpdateUserInfo}
@@ -276,9 +337,10 @@ function App() {
                 onClose={closeAllPopups}
                 currentUser={currentUser}
               />
+              </ProtectedRoute>
             }>
             </Route>
-          </Route>
+
           <Route exact path='*' element={
             <NotFindPage />
           }>
