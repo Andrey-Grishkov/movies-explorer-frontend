@@ -65,11 +65,9 @@ function App() {
         if (res) {
           setInfoTooltipStatus (true);
           setInfoTooltipMessage('Вы успешно авторизировались!');
-          console.log(res);
           setInfoTooltip(true);
           setLoggedIn(true);
           setCurrentUser(res);
-          localStorage.setItem('LoggedIn', JSON.stringify(true));
           history('/movies');
         }
       })
@@ -81,73 +79,25 @@ function App() {
       });
   };
 
-  console.log(currentUser, 909);
-  console.log(loggedIn, 702);
-
-  // const handleCheckToken = () => {
-  //   auth
-  //     .checkToken()
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         setLoggedIn(true);
-  //         setCurrentUser(res);
-  //         history(location);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  //
-  // useEffect(() => {
-  //   handleCheckToken();
-  // }, []);
-
-  // useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((res) => {
-  //       if (res) {
-  //         setLoggedIn(true);
-  //         setCurrentUser(res);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [loggedIn]);
-
   useEffect(() => {
-    Promise.all([api.getUserInfo()])
-      .then(([user]) => {
-        setLoggedIn(true);
-        setCurrentUser(user);
-        history(location)
-      })
-      .catch((err) => {
-        setLoggedIn(false)
-        console.log(err);
-      })
-  }, [])
+      api
+        .getUserInfo()
+        .then((res) => {
+          if (res._id) {
+            setLoggedIn(true);
+            setCurrentUser(res);
+          }
+        })
+        .catch((err) => {
+          setLoggedIn(false)
+          console.log(`Ошибка: ${err}`);
+        })
+    }, [loggedIn]);
 
-
-
-  // useEffect(() => {
-  //   api.getUserInfo()
-  //     .then((user) => {
-  //       setLoggedIn(true);
-  //       // localStorage.setItem('location', sessionStorage)
-  //       history.push(location);
-  //       setCurrentUser(user);
-  //     })
-  //     .catch((err) => {
-  //       setLoggedIn(false);
-  //       localStorage.clear();
-  //       // history('/');
-  //       setCurrentUser({});
-  //       setResult([])
-  //       setSavedMovies([])
-  //     });
-  // }, [history]);
-
+  console.log('___________________________');
+  console.log(currentUser, 'currentUser');
+  console.log(loggedIn, 'loggedIn');
+  console.log('___________________________');
 
   function handleLogout() {
     auth.logout()
@@ -304,7 +254,6 @@ function App() {
             <Login onLogin={onLogin}/>
           }>
           </Route>
-
             <Route exact path='/movies' element={
               <ProtectedRoute loggedIn={loggedIn}>
                 <Movies
@@ -340,7 +289,6 @@ function App() {
               </ProtectedRoute>
             }>
             </Route>
-
           <Route exact path='*' element={
             <NotFindPage />
           }>

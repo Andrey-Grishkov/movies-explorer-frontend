@@ -1,7 +1,5 @@
 import { baseUrl, beatFilmMovies } from '../utils/constants';
 
-// const beatFilmMovies = 'https://api.nomoreparties.co/'
-
 class Api {
   _url;
   _headers;
@@ -76,10 +74,6 @@ class Api {
 const headers = {
   'Content-Type': 'application/json',
 };
-
-// const api = new Api('https://api.movies.grishkov.nomoredomains.icu', headers);
-
-// const api = new Api('http://localhost:3001', headers);
 
 const api = new Api(baseUrl, headers);
 
