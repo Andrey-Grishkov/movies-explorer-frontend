@@ -26,8 +26,8 @@ function App() {
   const [infoTooltipStatus, setInfoTooltipStatus] = useState(false);
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const location = useLocation();
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
@@ -66,8 +66,8 @@ function App() {
           setInfoTooltipStatus (true);
           setInfoTooltipMessage('Вы успешно авторизировались!');
           setInfoTooltip(true);
-          setLoggedIn(true);
-          setCurrentUser(res);
+          // setCurrentUser(res);
+          // setLoggedIn(true);
           history('/movies');
         }
       })
@@ -84,8 +84,8 @@ function App() {
         .getUserInfo()
         .then((res) => {
           if (res._id) {
-            setLoggedIn(true);
             setCurrentUser(res);
+            setLoggedIn(true);
           }
         })
         .catch((err) => {
