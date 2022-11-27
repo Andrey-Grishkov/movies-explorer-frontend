@@ -22,7 +22,7 @@ const Header = ({auth}) => {
       <div className='header__logo-container'>
         <Logo />
       </div>
-      {!auth ? <HeaderAuth /> :  <HeaderNav onClick={handleClickOpen}/>}
+      {auth || auth===null ? <HeaderNav onClick={handleClickOpen}/> : <HeaderAuth />}
       <Navigation isOpen={isOpen} onClick={handleClickClose} />
     </header>
   );

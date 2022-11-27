@@ -89,7 +89,7 @@ function App() {
           }
         })
         .catch((err) => {
-          setLoggedIn(false)
+          // setLoggedIn(false)
           console.log(`Ошибка: ${err}`);
         })
     }, [loggedIn]);
