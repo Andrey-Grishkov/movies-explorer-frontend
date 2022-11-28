@@ -26,7 +26,7 @@ function App() {
   const [infoTooltipStatus, setInfoTooltipStatus] = useState(false);
   const [infoTooltipMessage, setInfoTooltipMessage] = useState('');
   const location = useLocation();
-  const [loggedIn, setLoggedIn] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const history = useNavigate();
   const [regIn, setRegIn] = useState(false);
@@ -66,8 +66,8 @@ function App() {
           setInfoTooltipStatus (true);
           setInfoTooltipMessage('Вы успешно авторизировались!');
           setInfoTooltip(true);
-          // setCurrentUser(res);
-          // setLoggedIn(true);
+          setCurrentUser(res);
+          setLoggedIn(true);
           history('/movies');
         }
       })
@@ -89,15 +89,10 @@ function App() {
           }
         })
         .catch((err) => {
-          // setLoggedIn(false)
+          setLoggedIn(false)
           console.log(`Ошибка: ${err}`);
         })
     }, [loggedIn]);
-
-  console.log('___________________________');
-  console.log(currentUser, 'currentUser');
-  console.log(loggedIn, 'loggedIn');
-  console.log('___________________________');
 
   function handleLogout() {
     auth.logout()
@@ -255,7 +250,7 @@ function App() {
           }>
           </Route>
             <Route exact path='/movies' element={
-              <ProtectedRoute loggedIn={loggedIn}>
+              <ProtectedRoute isAuth={loggedIn}>
                 <Movies
                  cards={result}
                  onSearch={handleGetMoviesCards}
@@ -266,7 +261,7 @@ function App() {
               </ProtectedRoute>}>
             </Route>
             <Route exact path='/saved-movies' element={
-              <ProtectedRoute loggedIn={loggedIn}>
+              <ProtectedRoute isAuth={loggedIn}>
               <SavedMovies
                 cards={savedMovies}
                 onSearch={handleSavedMoviesSearch}
@@ -277,7 +272,7 @@ function App() {
             }>
             </Route>
             <Route exact path='/profile' element={
-              <ProtectedRoute loggedIn={loggedIn}>
+              <ProtectedRoute isAuth={loggedIn}>
               <Profile
                 handleLogout={handleLogout}
                 handleUpdateUserInfo={handleUpdateUserInfo}
