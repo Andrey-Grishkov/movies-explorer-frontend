@@ -29,7 +29,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const history = useNavigate();
-  const [regIn, setRegIn] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [result, setResult] = useState([]);
@@ -41,7 +40,6 @@ function App() {
       .then((res) => {
         console.log(res, 'Данные регистрации');
         if (res) {
-          setRegIn(true);
           setInfoTooltipStatus(true);
           setInfoTooltipMessage('Вы успешно зарегистрированы!');
           setInfoTooltip(true);
@@ -49,7 +47,6 @@ function App() {
         }
       })
       .catch((err) => {
-        setRegIn(false);
         setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
         setInfoTooltipStatus (false);
         setInfoTooltip(true);
@@ -89,7 +86,11 @@ function App() {
           }
         })
         .catch((err) => {
-          setLoggedIn(false)
+          setLoggedIn(false);
+          setCurrentUser({});
+          localStorage.clear();
+          setSavedMovies([]);
+          setResult([]);
           console.log(`Ошибка: ${err}`);
         })
     }, [loggedIn]);
@@ -104,6 +105,7 @@ function App() {
         setLoggedIn(false);
         localStorage.clear();
         setSavedMovies([]);
+        setResult([]);
       })
       .catch((err) => {
         setInfoTooltipStatus (false);
