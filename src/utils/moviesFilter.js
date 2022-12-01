@@ -7,7 +7,7 @@ const movieComparer = (card, request) => {
     year,
     description,
     nameRU,
-    nameEN,
+    nameEN
   } = card;
 
   if (country && country.toLowerCase().match(request)) {

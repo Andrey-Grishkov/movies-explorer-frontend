@@ -4,7 +4,7 @@ import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import SwitchCheckbox from "../SwitchCheckbox/SwitchCheckbox";
 
-function SearchForm({ onSearch, checkbox, handleSwitchCheckbox}) {
+function SearchForm({ onSearch, checkbox, handleSwitchCheckbox, checkboxSaved, flag, handleSwitchCheckboxSaved}) {
   const [notFindError, setNotFindError] = useState(false);
   const [request, setRequest] = useState("");
 
@@ -48,6 +48,9 @@ function SearchForm({ onSearch, checkbox, handleSwitchCheckbox}) {
         <SwitchCheckbox
           handleSwitchCheckbox={handleSwitchCheckbox}
           checkbox={checkbox}
+          checkboxSaved={checkboxSaved}
+          flag={flag}
+          handleSwitchCheckboxSaved={handleSwitchCheckboxSaved}
         />
         <p className='search-form__filter-name'>Короткометражки</p>
       </div>

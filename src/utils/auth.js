@@ -8,7 +8,7 @@ function checkResponse(res) {
 }
 
 export const register = ({email, name, password}) => {
-  console.log({email, name, password});
+  console.log({email, name, password}, 'console in auth');
   return fetch(`${baseUrl}/signup`, {
     method: 'POST',
     headers: {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SavedMovies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -6,7 +6,7 @@ import Preloader from "../Preloader/Preloader";
 
 const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) => {
   const [isSearchedSaved, setIsSearchedSaved] = useState(false);
-  const [checkbox, setCheckbox] = useState(false);
+  const [checkboxSaved, setCheckboxSaved] = useState(false);
   const [counter, setCounter] = useState(0);
 
   const countBigSize = 12;
@@ -25,10 +25,14 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) 
       setWindowSize(countBigSize);
     }});
 
-  const handleSwitchCheckbox = () => {
-    setCheckbox(!checkbox);
-    console.log('переключение чекбокса')
+  const handleSwitchCheckboxSaved = () => {
+    setCheckboxSaved(!checkboxSaved);
+    localStorage.setItem('checkboxSaved', JSON.stringify(!checkboxSaved));
   }
+
+  useEffect(() => {
+    setCheckboxSaved(JSON.parse(localStorage.getItem('checkboxSaved')));
+  }, [handleSwitchCheckboxSaved])
 
   const handleSearch = (request) => {
     setIsSearchedSaved(true);
@@ -39,16 +43,17 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) 
     <section className='saved-movies'>
       <SearchForm
         onSearch={handleSearch}
-        handleSwitchCheckbox={handleSwitchCheckbox}
-        checkbox={checkbox}
+        handleSwitchCheckboxSaved={handleSwitchCheckboxSaved}
+        checkboxSaved={checkboxSaved}
+        flag='delete-favorites-btn'
       />
       {isLoadingSaved && <Preloader />}
       {!isLoadingSaved &&
       (   <MoviesCardList
           cards={cards}
           flag='delete-favorites-btn'
-          checkbox={checkbox}
-          handleSwitchCheckbox={handleSwitchCheckbox}
+          checkboxSaved={checkboxSaved}
+          handleSwitchCheckboxSaved={handleSwitchCheckboxSaved}
           isSearched={isSearchedSaved}
           handleSearch={handleSearch}
           windowSize={windowSize}

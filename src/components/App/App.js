@@ -32,6 +32,7 @@ function App() {
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [result, setResult] = useState([]);
+  const [authLogged, setAuthLogged] = useState(false);
 
   const onRegister = (data) => {
     const {email, name, password} = data;
@@ -66,12 +67,15 @@ function App() {
           setCurrentUser(res);
           setLoggedIn(true);
           history('/movies');
+          setAuthLogged(true);
+          localStorage.setItem('authKey', JSON.stringify(true));
         }
       })
       .catch((err) => {
         setInfoTooltipStatus (false);
         setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.')
         setInfoTooltip(true);
+        setAuthLogged(false);
         console.log(`Ошибка: ${err}`);
       });
   };
@@ -83,6 +87,9 @@ function App() {
           if (res._id) {
             setCurrentUser(res);
             setLoggedIn(true);
+            if(JSON.parse(localStorage.getItem('authKey'))===true){
+              setAuthLogged(true);
+            }
           }
         })
         .catch((err) => {
@@ -91,9 +98,12 @@ function App() {
           localStorage.clear();
           setSavedMovies([]);
           setResult([]);
+          setAuthLogged(false);
           console.log(`Ошибка: ${err}`);
         })
     }, [loggedIn]);
+
+  console.log(localStorage.getItem('authKey'), 909);
 
   function handleLogout() {
     auth.logout()
@@ -106,6 +116,8 @@ function App() {
         localStorage.clear();
         setSavedMovies([]);
         setResult([]);
+        setAuthLogged(false);
+        localStorage.setItem('authKey', JSON.stringify(false));
       })
       .catch((err) => {
         setInfoTooltipStatus (false);
@@ -114,6 +126,11 @@ function App() {
         console.log(`Ошибка: ${err}`);
       });
   }
+
+  console.log("________________________");
+  console.log(currentUser);
+  console.log(loggedIn);
+  console.log("________________________");
 
   const handleEditProfileClick = () => {
     setIsOpenEditProfile(true);
@@ -236,7 +253,7 @@ function App() {
         location.pathname === '/movies' ||
         location.pathname === '/saved-movies' ||
         location.pathname === '/profile'  ?
-          <Header auth={loggedIn}/> :
+          <Header auth={authLogged}/> :
           <></>}
         <Routes>
           <Route exact path='/' element={
@@ -254,7 +271,9 @@ function App() {
             <Route exact path='/movies' element={
               <ProtectedRoute isAuth={loggedIn}>
                 <Movies
-                 cards={result}
+                 //cards={result}
+                 cards={JSON.parse(localStorage.getItem('movies')) ?
+                   JSON.parse(localStorage.getItem('movies')) : result}
                  onSearch={handleGetMoviesCards}
                  isLoading={isLoading}
                  handleAddCard={handleAddSavedMovieCards}

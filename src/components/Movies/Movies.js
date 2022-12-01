@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './Movies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -29,8 +29,12 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
 
   const handleSwitchCheckbox = () => {
     setCheckbox(!checkbox);
-    console.log('переключение чекбокса')
+    localStorage.setItem('checkbox', JSON.stringify(!checkbox));
   }
+
+  useEffect(() => {
+    setCheckbox(JSON.parse(localStorage.getItem('checkbox')));
+  }, [handleSwitchCheckbox])
 
     const handleSearch = (request) => {
       setIsSearched(true);
@@ -51,6 +55,7 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
         onSearch={handleSearch}
         handleSwitchCheckbox={handleSwitchCheckbox}
         checkbox={checkbox}
+        flag='add-favorites-btn'
       />
       {isLoading && <Preloader />}
       {!isLoading &&
@@ -58,6 +63,7 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
           cards={cards}
           counter={counter}
           checkbox={checkbox}
+          // checkbox={JSON.parse(localStorage.getItem('checkbox'))}
           handleSwitchCheckbox={handleSwitchCheckbox}
           isSearched={isSearched}
           handleSearch={handleSearch}

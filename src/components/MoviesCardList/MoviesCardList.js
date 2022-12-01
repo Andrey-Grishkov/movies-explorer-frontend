@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, isSearched, handleSearch, windowSize,
-                          handleDeleteCard, handleAddCard, handleDeleteMovieCard}) => {
+                          handleDeleteCard, handleAddCard, handleDeleteMovieCard, handleSwitchCheckboxSaved, checkboxSaved}) => {
 
   const [filmDuration, setFilmDuration] = useState(checkbox ? 40 : 600)
   const [infoTooltip, setInfoTooltip] = useState(false);
@@ -20,6 +20,14 @@ const MoviesCardList = ({cards, flag, counter, checkbox, handleSwitchCheckbox, i
       setFilmDuration(600)
     }
   }, [handleSwitchCheckbox]);
+
+  useEffect(() => {
+    if(checkboxSaved) {
+      setFilmDuration(40)
+    } else {
+      setFilmDuration(600)
+    }
+  }, [handleSwitchCheckboxSaved]);
 
   useEffect(() => {
     if(!cards.length && isSearched) {
