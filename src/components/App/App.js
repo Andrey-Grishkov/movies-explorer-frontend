@@ -69,6 +69,7 @@ function App() {
           history('/movies');
           setAuthLogged(true);
           localStorage.setItem('authKey', JSON.stringify(true));
+          handleGetSavedMoviesCards();
         }
       })
       .catch((err) => {
@@ -103,7 +104,16 @@ function App() {
         })
     }, [loggedIn]);
 
-  console.log(localStorage.getItem('authKey'), 909);
+  useEffect(() => {
+    setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')));
+  }, []);
+
+  console.log('____________________________________________');
+  console.log(savedMovies, 'savedMovies');
+  console.log(JSON.parse(localStorage.getItem('savedMovies')), 'localStor');
+  console.log(result, 'result');
+  console.log(JSON.parse(localStorage.getItem('movies')), 'resultLokal');
+  console.log('____________________________________________');
 
   function handleLogout() {
     auth.logout()
@@ -126,11 +136,6 @@ function App() {
         console.log(`Ошибка: ${err}`);
       });
   }
-
-  console.log("________________________");
-  console.log(currentUser);
-  console.log(loggedIn);
-  console.log("________________________");
 
   const handleEditProfileClick = () => {
     setIsOpenEditProfile(true);
@@ -156,14 +161,8 @@ function App() {
   }
 
   useEffect(() => {
-    setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')) ?
-      JSON.parse(localStorage.getItem('savedMovies')) : [])
-  }, [])
-
-  useEffect(() => {
-    setResult(JSON.parse(localStorage.getItem('movies')) ?
-      JSON.parse(localStorage.getItem('movies')) : [])
-  }, [])
+    setResult(JSON.parse(localStorage.getItem('movies')) === null ? [] : JSON.parse(localStorage.getItem('movies')));
+  }, []);
 
   const handleGetMoviesCards = (request) => {
     setIsLoading(true);
@@ -171,25 +170,27 @@ function App() {
       .getMoviesCards()
       .then((res) => {
         setResult(moviesFilter(res, request))
-        localStorage.setItem('movies', JSON.stringify(result));
+        localStorage.setItem('movies', JSON.stringify(moviesFilter(res, request)));
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
       .finally(() => {
         setIsLoading(false);
       });
+    const findFavoritesMovies = [];
 
+    JSON.parse(localStorage.getItem('savedMovies')).forEach((movie) => {
+      findFavoritesMovies.push(movie.nameRU)
+    })
+    localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(findFavoritesMovies));
+  };
+
+  const handleGetSavedMoviesCards = () => {
     api
       .getMovieCards()
       .then((res) => {
-        const findFavoritesMovies = [];
-        res.forEach((movie) => {
-          findFavoritesMovies.push(movie.nameRU)
-        })
-        localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(findFavoritesMovies));
-        setSavedMovies(moviesFilter(res, request))
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        localStorage.setItem('savedMovies', JSON.stringify((res.filter((savedCard) => savedCard.owner===currentUser._id))));
       })
-  };
+  }
 
   const handleAddSavedMovieCards = (card) => {
     setIsLoadingSaved(true);
@@ -235,10 +236,13 @@ function App() {
 
   function handleSavedMoviesSearch(request) {
     setIsLoadingSaved(true);
+    setSavedMovies(moviesFilter(JSON.parse(localStorage.getItem('savedMovies')), request));
+    // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+
     api.getMovieCards()
       .then((res) => {
-        setSavedMovies(moviesFilter(res, request));
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        // setSavedMovies(moviesFilter(res, request));
+        // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -271,9 +275,7 @@ function App() {
             <Route exact path='/movies' element={
               <ProtectedRoute isAuth={loggedIn}>
                 <Movies
-                 //cards={result}
-                 cards={JSON.parse(localStorage.getItem('movies')) ?
-                   JSON.parse(localStorage.getItem('movies')) : result}
+                 cards={result}
                  onSearch={handleGetMoviesCards}
                  isLoading={isLoading}
                  handleAddCard={handleAddSavedMovieCards}
@@ -285,6 +287,7 @@ function App() {
               <ProtectedRoute isAuth={loggedIn}>
               <SavedMovies
                 cards={savedMovies}
+                //cards={JSON.parse(localStorage.getItem('savedMovies'))}
                 onSearch={handleSavedMoviesSearch}
                 handleDeleteMovieCard={handleDeleteMovieSavedLoc}
                 isLoadingSaved={isLoadingSaved}

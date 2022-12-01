@@ -27,15 +27,17 @@ const SavedMovies = ({ onSearch, cards, isLoadingSaved, handleDeleteMovieCard}) 
 
   const handleSwitchCheckboxSaved = () => {
     setCheckboxSaved(!checkboxSaved);
-    localStorage.setItem('checkboxSaved', JSON.stringify(!checkboxSaved));
+    // localStorage.setItem('checkboxSaved', JSON.stringify(!checkboxSaved));
   }
 
-  useEffect(() => {
-    setCheckboxSaved(JSON.parse(localStorage.getItem('checkboxSaved')));
-  }, [handleSwitchCheckboxSaved])
+  // useEffect(() => {
+  //   setCheckboxSaved(JSON.parse(localStorage.getItem('checkboxSaved')));
+  // }, [handleSwitchCheckboxSaved])
 
   const handleSearch = (request) => {
+    const defaultSaved = 'Фильмы';
     setIsSearchedSaved(true);
+    localStorage.setItem('requestSaved', JSON.stringify(defaultSaved));
     onSearch(request);
   };
 

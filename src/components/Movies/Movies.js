@@ -38,6 +38,7 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
 
     const handleSearch = (request) => {
       setIsSearched(true);
+      localStorage.setItem('request', JSON.stringify(request));
       onSearch(request);
   };
 
@@ -63,7 +64,6 @@ const Movies = ({cards, isLoading, onSearch, handleAddCard, handleDeleteCard}) =
           cards={cards}
           counter={counter}
           checkbox={checkbox}
-          // checkbox={JSON.parse(localStorage.getItem('checkbox'))}
           handleSwitchCheckbox={handleSwitchCheckbox}
           isSearched={isSearched}
           handleSearch={handleSearch}

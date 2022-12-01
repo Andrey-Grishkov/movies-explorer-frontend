@@ -1,9 +1,9 @@
 import React from 'react';
 import './SwitchCheckbox.css';
 
-function SwitchCheckbox({ handleSwitchCheckbox, flag, handleSwitchCheckboxSaved }) {
+function SwitchCheckbox({ handleSwitchCheckbox, flag, handleSwitchCheckboxSaved, checkboxSaved }) {
   const inputChecked = flag==='add-favorites-btn' ? JSON.parse(localStorage.getItem('checkbox')) :
-    JSON.parse(localStorage.getItem('checkboxSaved'));
+    checkboxSaved;
 
   return (
         <label className='switch-checkbox__switch'>
