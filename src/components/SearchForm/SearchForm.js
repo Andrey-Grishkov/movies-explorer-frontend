@@ -4,7 +4,7 @@ import "./SearchForm.css";
 import search from "../../images/search-form__search-button.svg";
 import SwitchCheckbox from "../SwitchCheckbox/SwitchCheckbox";
 
-function SearchForm({ onSearch, checkbox, handleSwitchCheckbox, checkboxSaved, flag, handleSwitchCheckboxSaved}) {
+function SearchForm({ onSearch, checkbox, handleSwitchCheckbox, checkboxSaved, flag, handleSwitchCheckboxSaved, isLoading}) {
   const [notFindError, setNotFindError] = useState(false);
   const [request, setRequest] = useState("");
   const [defaultValue, setDefaultValue] = useState('Фильмы');
@@ -39,6 +39,7 @@ function SearchForm({ onSearch, checkbox, handleSwitchCheckbox, checkboxSaved, f
           required
           value={request}
           onChange={handleSearchInput}
+          disabled={isLoading}
         />
         <button className='search-form__search-button' type='submit'>
           <img  className='search-form__search-image' src={search} alt='кнопка поиска'/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
+import {Route, Routes, useLocation, useNavigate, Navigate} from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -202,15 +202,6 @@ function App() {
 
   };
 
-  console.log('____________________________________________');
-  console.log(savedMovies, 'savedMovies');
-  console.log(JSON.parse(localStorage.getItem('savedMovies')), 'localStor');
-  console.log(result, 'result');
-  console.log(JSON.parse(localStorage.getItem('movies')), 'resultLokal');
-  console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')), 'FavoritesMoviesBtn');
-  console.log('____________________________________________');
-
-
   // const handleFindMoviesCards = (request) => {
   //   setIsLoading(true);
   //   apiMovies
@@ -283,12 +274,9 @@ function App() {
   function handleSavedMoviesSearch(request) {
     setIsLoadingSaved(true);
     setSavedMovies(moviesFilter(JSON.parse(localStorage.getItem('savedMovies')), request));
-    // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
 
     api.getMovieCards()
       .then((res) => {
-        // setSavedMovies(moviesFilter(res, request));
-        // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -311,18 +299,21 @@ function App() {
           }>
           </Route>
           <Route exact path='/signup' element={
-            <Register onRegister={onRegister}/>
+            !authLogged ?
+            <Register onRegister={onRegister}/> :
+            <Navigate to='/' />
           }>
           </Route>
           <Route exact path='/signin' element={
-            <Login onLogin={onLogin}/>
+            !authLogged ?
+            <Login onLogin={onLogin}/> :
+              <Navigate to='/' />
           }>
           </Route>
             <Route exact path='/movies' element={
               <ProtectedRoute isAuth={loggedIn}>
                 <Movies
                  cards={result}
-                 //cards={(JSON.parse(localStorage.getItem('movies')))}
                  onSearch={handleGetMoviesCards}
                  isLoading={isLoading}
                  handleAddCard={handleAddSavedMovieCards}
@@ -334,7 +325,6 @@ function App() {
               <ProtectedRoute isAuth={loggedIn}>
               <SavedMovies
                 cards={savedMovies}
-                // cards={JSON.parse(localStorage.getItem('savedMovies'))}
                 onSearch={handleSavedMoviesSearch}
                 handleDeleteMovieCard={handleDeleteMovieSavedLoc}
                 isLoadingSaved={isLoadingSaved}

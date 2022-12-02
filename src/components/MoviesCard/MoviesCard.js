@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import "./MoviesCard.css";
-const beatFilmMovies = 'https://api.nomoreparties.co/'
+import { BEAT_FILM_MOVIES, MOVIE_DURATION_HOUR } from '../../utils/constants';
 
 const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMovieCard}) => {
-  const imageLink = beatFilmMovies + card.image.url;
+  const imageLink = BEAT_FILM_MOVIES + card.image.url;
   const imageLinkSaved = card.image;
-  const durationHours = parseInt((card.duration/60));
-  const durationMin = card.duration%60;
+  const durationHours = parseInt((card.duration/MOVIE_DURATION_HOUR));
+  const durationMin = card.duration%MOVIE_DURATION_HOUR;
 
   const [isFavorite, setIsFavorite] =
     useState(flag === 'add-favorites-btn' && JSON.parse(localStorage.getItem('FavoritesMoviesBtn')) !== null ?

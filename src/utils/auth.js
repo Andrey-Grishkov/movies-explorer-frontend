@@ -1,4 +1,4 @@
-import { baseUrl } from '../utils/constants';
+import { BASE_URL } from '../utils/constants';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -9,7 +9,7 @@ function checkResponse(res) {
 
 export const register = ({email, name, password}) => {
   console.log({email, name, password}, 'console in auth');
-  return fetch(`${baseUrl}/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export const register = ({email, name, password}) => {
 };
 
 export const authorize = ({email, password}) => {
-  return fetch(`${baseUrl}/signin`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export const authorize = ({email, password}) => {
 
 export const logout = () => {
   console.log('viatka');
-    return fetch(`${baseUrl}/signout`, {
+    return fetch(`${BASE_URL}/signout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

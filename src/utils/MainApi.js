@@ -1,12 +1,12 @@
-import { baseUrl, beatFilmMovies } from '../utils/constants';
+import { BASE_URL, HEADERS, BEAT_FILM_MOVIES} from '../utils/constants';
 
 class Api {
   _url;
   _headers;
 
-  constructor(baseUrl, headers) {
-    this._url = baseUrl;
-    this._headers = headers;
+  constructor(BASE_URL, HEADERS) {
+    this._url = BASE_URL;
+    this._headers = HEADERS;
   }
 
   _checkResponse(res) {
@@ -34,9 +34,9 @@ class Api {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: `${beatFilmMovies}${data.image.url}`,
+        image: `${BEAT_FILM_MOVIES}${data.image.url}`,
         trailerLink: data.trailerLink,
-        thumbnail: beatFilmMovies+data.image.formats.thumbnail.url,
+        thumbnail: BEAT_FILM_MOVIES+data.image.formats.thumbnail.url,
         movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
@@ -71,10 +71,6 @@ class Api {
   }
 }
 
-const headers = {
-  'Content-Type': 'application/json',
-};
-
-const api = new Api(baseUrl, headers);
+const api = new Api(BASE_URL, HEADERS);
 
 export default api;

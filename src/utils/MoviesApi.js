@@ -1,16 +1,12 @@
-const beatFilmMovies = 'https://api.nomoreparties.co/beatfilm-movies'
-
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { BEAT_FILM_MOVIES_SERVER, HEADERS } from '../utils/constants';
 
 class Api {
   _url;
   _headers;
 
-  constructor(beatFilmMovies, headers) {
-    this._url = beatFilmMovies;
-    this._headers = headers;
+  constructor(BEAT_FILM_MOVIES_SERVER, HEADERS) {
+    this._url = BEAT_FILM_MOVIES_SERVER;
+    this._headers = HEADERS;
   }
 
   _checkResponse(res) {
@@ -28,6 +24,6 @@ class Api {
   }
 }
 
-const apiMovies = new Api(beatFilmMovies, headers);
+const apiMovies = new Api(BEAT_FILM_MOVIES_SERVER, HEADERS);
 
 export default apiMovies;
