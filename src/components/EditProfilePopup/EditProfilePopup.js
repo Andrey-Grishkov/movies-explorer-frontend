@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import "./EditProfilePopup.css";
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const errors = {
   required: "Обязательно для заполнения",
@@ -8,14 +9,17 @@ const errors = {
   email: "Некорректный email",
   minLength: "Введите не менее 2 символов",
   maxLength: "Введите не более 30 символов",
+  nameCurrent: "Имя совпадает с существующим",
+  emailCurrent: "Почта совпадает с существующей",
 }
 
 function EditProfilePopup(props) {
-
+  const currentUser = useContext(CurrentUserContext);
   const [errorName, setErrorName] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
   const [disabledBtnName, setDisabledBtnName] = useState(true);
   const [disabledBtnEmail, setDisabledBtnEmail] = useState(true);
+  const [disabledCurrentName, setDisabledCurrentName] = useState(true);
 
   function handleErrorEmail(e) {
     const inputEmail = e.target;
@@ -33,6 +37,9 @@ function EditProfilePopup(props) {
       setErrorEmail('');
       setDisabledBtnEmail(false);
     }
+    // if (currentUser.email === props.valueEmail) {
+    //   setErrorEmail(errors.emailCurrent);
+    // }
     props.setEmail(inputEmail.value);
   }
 
@@ -52,10 +59,14 @@ function EditProfilePopup(props) {
       setErrorName('');
       setDisabledBtnName(false);
     }
+    // if (currentUser.name === props.valueName) {
+    //   setErrorName(errors.nameCurrent);
+    // }
     props.setName(inputName.value);
   }
 
-  const disabledBtn = disabledBtnName || disabledBtnEmail;
+  const isDisabled = currentUser.name === props.valueName && currentUser.email === props.valueEmail;
+  const disabledBtn = disabledBtnName || disabledBtnEmail || isDisabled;
 
   return (
     <PopupWithForm

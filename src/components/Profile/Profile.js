@@ -2,8 +2,10 @@ import React from "react";
 import "./Profile.css";
 import {NavLink} from "react-router-dom";
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup'
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function Profile(props) {
+
   const [name, setName] =  React.useState('');
   const [email, setEmail] = React.useState('');
 

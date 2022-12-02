@@ -49,7 +49,8 @@ function App() {
           setAuthLogged(true);
           history('/movies');
           localStorage.setItem('authKey', JSON.stringify(true));
-          handleGetMoviesCards();
+          // handleGetMoviesCards();
+          handleGetSavedMoviesCards();
         }
       })
       .catch((err) => {
@@ -74,7 +75,7 @@ function App() {
           history('/movies');
           setAuthLogged(true);
           localStorage.setItem('authKey', JSON.stringify(true));
-          handleGetMoviesCards();
+          // handleGetMoviesCards();
           handleGetSavedMoviesCards();
         }
       })
@@ -110,25 +111,7 @@ function App() {
         })
     }, [authLogged]);
 
-  useEffect(() => {
-    setResult(JSON.parse(localStorage.getItem('movies')) === null ? [] : JSON.parse(localStorage.getItem('movies')));
-  }, []);
-
-  useEffect(() => {
-    setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')) === null ? [] : JSON.parse(localStorage.getItem('savedMovies')));
-  }, []);
-
-  console.log('____________________________________________');
-  console.log(savedMovies, 'savedMovies');
-  console.log(JSON.parse(localStorage.getItem('savedMovies')), 'localStor');
-  console.log(result, 'result');
-  console.log(JSON.parse(localStorage.getItem('movies')), 'resultLokal');
-  console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')), 'FavoritesMoviesBtn');
-  console.log('____________________________________________');
-
-
   function handleLogout() {
-
     auth.logout()
       .then((res) => {
         setInfoTooltipStatus (true);
@@ -164,6 +147,9 @@ function App() {
   const handleUpdateUserInfo = (email, name) => {
     api.addUserInfo(email, name)
       .then((user) => {
+        setInfoTooltipStatus (true);
+        setInfoTooltipMessage('Данные пользователя обновлены')
+        setInfoTooltip(true);
         setCurrentUser(user);
         setIsOpenEditProfile(false);
       })
@@ -175,33 +161,74 @@ function App() {
       });
   }
 
-  const handleGetMoviesCards = () => {
-    apiMovies
-      .getMoviesCards()
-      .then((res) => {
-        localStorage.setItem('movies', JSON.stringify(res));
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`))
-  };
+  // const handleGetMoviesCards = () => {
+  //   apiMovies
+  //     .getMoviesCards()
+  //     .then((res) => {
+  //       localStorage.setItem('movies', JSON.stringify(res));
+  //     })
+  //     .catch((err) => console.log(`Ошибка: ${err}`))
+  // };
 
-  const handleFindMoviesCards = (request) => {
+  //_________ФИЛЬМЫ___________________________
+
+  useEffect(() => {
+    setResult(JSON.parse(localStorage.getItem('movies')) === null ? [] : JSON.parse(localStorage.getItem('movies')));
+  }, []);
+
+  useEffect(() => {
+    setSavedMovies(JSON.parse(localStorage.getItem('savedMovies')) === null ? [] : JSON.parse(localStorage.getItem('savedMovies')));
+  }, []);
+
+  const handleGetMoviesCards = (request) => {
     setIsLoading(true);
     apiMovies
       .getMoviesCards()
-      .then(() => {
+      .then((res) => {
+        setResult(moviesFilter(res, request))
+        localStorage.setItem('movies', JSON.stringify(moviesFilter(res, request)));
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
       .finally(() => {
         setIsLoading(false);
       });
 
-    setResult(moviesFilter(JSON.parse(localStorage.getItem('movies')), request));
     const findFavoritesMovies = [];
+
     JSON.parse(localStorage.getItem('savedMovies')).forEach((movie) => {
       findFavoritesMovies.push(movie.nameRU)
     })
     localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(findFavoritesMovies));
-  }
+
+  };
+
+  console.log('____________________________________________');
+  console.log(savedMovies, 'savedMovies');
+  console.log(JSON.parse(localStorage.getItem('savedMovies')), 'localStor');
+  console.log(result, 'result');
+  console.log(JSON.parse(localStorage.getItem('movies')), 'resultLokal');
+  console.log(JSON.parse(localStorage.getItem('FavoritesMoviesBtn')), 'FavoritesMoviesBtn');
+  console.log('____________________________________________');
+
+
+  // const handleFindMoviesCards = (request) => {
+  //   setIsLoading(true);
+  //   apiMovies
+  //     .getMoviesCards()
+  //     .then(() => {
+  //     })
+  //     .catch((err) => console.log(`Ошибка: ${err}`))
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  //
+  //   setResult(moviesFilter(JSON.parse(localStorage.getItem('movies')), request));
+  //   const findFavoritesMovies = [];
+  //   JSON.parse(localStorage.getItem('savedMovies')).forEach((movie) => {
+  //     findFavoritesMovies.push(movie.nameRU)
+  //   })
+  //   localStorage.setItem('FavoritesMoviesBtn', JSON.stringify(findFavoritesMovies));
+  // }
 
   const handleGetSavedMoviesCards = () => {
     api
@@ -296,7 +323,7 @@ function App() {
                 <Movies
                  cards={result}
                  //cards={(JSON.parse(localStorage.getItem('movies')))}
-                 onSearch={handleFindMoviesCards}
+                 onSearch={handleGetMoviesCards}
                  isLoading={isLoading}
                  handleAddCard={handleAddSavedMovieCards}
                  handleDeleteCard={deleteMovieCard}
@@ -307,7 +334,7 @@ function App() {
               <ProtectedRoute isAuth={loggedIn}>
               <SavedMovies
                 cards={savedMovies}
-                //cards={JSON.parse(localStorage.getItem('savedMovies'))}
+                // cards={JSON.parse(localStorage.getItem('savedMovies'))}
                 onSearch={handleSavedMoviesSearch}
                 handleDeleteMovieCard={handleDeleteMovieSavedLoc}
                 isLoadingSaved={isLoadingSaved}
