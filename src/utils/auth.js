@@ -31,6 +31,7 @@ export const authorize = ({email, password}) => {
 };
 
 export const logout = () => {
+  console.log('viatka');
     return fetch(`${baseUrl}/signout`, {
       method: 'POST',
       headers: {

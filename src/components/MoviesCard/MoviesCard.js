@@ -10,7 +10,9 @@ const MoviesCard = ({card, flag, handleDeleteCard, handleAddCard, handleDeleteMo
   const durationMin = card.duration%60;
 
   const [isFavorite, setIsFavorite] =
-    useState(flag === 'add-favorites-btn' ? JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).includes(card.nameRU) : false);
+    useState(flag === 'add-favorites-btn' && JSON.parse(localStorage.getItem('FavoritesMoviesBtn')) !== null ?
+      JSON.parse(localStorage.getItem('FavoritesMoviesBtn')).includes(card.nameRU)
+      : false);
 
   function handleSaveMovie () {
     if (!isFavorite) {
