@@ -76,6 +76,8 @@
     cursor: pointer;
     text-decoration: none;
     color: #FFFFFF;
+    border: none;
+    background-color: #202020;
 }
 
 .profile__link:hover {

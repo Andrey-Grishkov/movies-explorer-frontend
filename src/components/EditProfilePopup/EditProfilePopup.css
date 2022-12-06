@@ -1,0 +1,87 @@
+.popup__user-input {
+    margin-left: 36px;
+    min-width: 358px;
+    min-height: 27px;
+    font-size: 14px;
+    border: none;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.popup__user-input:first-of-type {
+    margin-top: 54px;
+}
+
+.popup__user-input:last-of-type {
+    margin-top: 35px;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__user-input {
+        margin-left: 4.69vw;
+        min-width: 50vw;
+        min-height: 3.52vw;
+        font-size: 1.82vw;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .popup__user-input {
+        margin: 5.22vw 0 0 5.4vw;
+        max-width: 44vw;
+        font-size: 3.6vw;
+    }
+    .popup__user-input:last-of-type {
+        margin: 20vw 0 0 5.4vw;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .popup__user-input {
+        min-width: 74.38vw;
+        font-size: 4.38vw;
+        padding-bottom: 4.06vw;
+    }
+    .popup__user-input:first-of-type {
+        margin: 23.44vw 0 0 6.88vw;
+    }
+    .popup__user-input:last-of-type {
+        margin: 25vw 0 0 6.88vw;
+    }
+}
+
+.popup__user-input_type_error {
+    color: #FF0000;
+    border-bottom: 1px solid #FF0000;
+}
+
+.popup__error_visible {
+    color: #FF0000;
+    font-size: 12px;
+    line-height: 15px;
+    min-width: 358px;
+    position: absolute;
+    left: 36px;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__error_visible {
+        left: 4.69vw;
+        min-width: 50vw;
+        max-width: 50vw;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .popup__error_visible {
+        left: 5.22vw;
+        max-width: 44vw;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .popup__error_visible {
+        min-width: 74.38vw;
+    }
+}

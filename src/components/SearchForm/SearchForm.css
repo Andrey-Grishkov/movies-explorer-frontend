@@ -110,3 +110,23 @@
         margin: 0 16px 0 0;
     }
 }
+
+.search-form__search-error {
+    margin: 10px 70px 10px 70px;
+    color: #EE3465;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .search-form__search-error {
+        margin: 10px 30px 10px 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-form__search-error {
+        margin: 10px 14px 10px 14px;
+    }
+}
