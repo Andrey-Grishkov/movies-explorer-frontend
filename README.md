@@ -1,17 +1,28 @@
 <h3 align="left">🎥 Проект: movies-explorer-frontend</h3>
 
 <h3 align="left">🎞️ Содержание</h3>
-* Ссылки на сервер и домейны проекта
-* Введение
-* Реализованные функции и используемые технологии
-* Стек
-* Макет в Figma
+<ul>
+<li> Ссылки на сервер и домейны проекта </li>
+<li> Введение </li>
+<li> Реализованные функции и используемые технологии </li>
+<li> Стек </li>
+<li> Макет в Figma </li>
+</ul>
 
 <h3 align="left">🌐 Ссылки на сервер и домейны проекта:</h3>
-* 🗄️ IP сервера: 158.160.40.254
-* ⚛️ Frontend часть: https://movies.grishkov.nomoredomains.club
-* ⚙️ Backend часть: https://api.movies.grishkov.nomoredomains.icu
-  (репозиторий с Backend частью: https://github.com/Andrey-Grishkov/movies-explorer-api)
+
+<ul>
+<li>🗄️ IP сервера: 158.160.40.254</li>
+<li>⚛️ Frontend часть:
+<a href="https://movies.grishkov.nomoredomains.club" style="cursor: pointer">https://movies.grishkov.nomoredomains.club</a>
+</li>
+<li>⚙️ Backend часть:
+<a href="https://api.movies.grishkov.nomoredomains.icu" style="cursor: pointer">https://api.movies.grishkov.nomoredomains.icu</a>
+</li>
+<li>Репозиторий с Backend частью:
+<a href="https://github.com/Andrey-Grishkov/movies-explorer-api" style="cursor: pointer">https://github.com/Andrey-Grishkov/movies-explorer-api</a>
+</li>
+</ul>
 
 <h3 align="left">🎬️ Введение</h3>
 Приложение для поиска фильмов, выполненное в рамках дипломного проекта Яндекс-Практикум с использованием React.
@@ -47,6 +58,11 @@
 </p>
 
 <h3 align="left"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg" alt="figma" width="40" height="40"/> ссылка на макет в Figma:</h3>
-* https://disk.yandex.ru/d/wOtuZSaDkSDGLw
+<ul>
+<li>
+<a href="https://disk.yandex.ru/d/wOtuZSaDkSDGLw" style="cursor: pointer">https://disk.yandex.ru/d/wOtuZSaDkSDGLw</a>
+</li>
+</ul>
+
 
 
