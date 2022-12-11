@@ -10,14 +10,17 @@
 </ul>
 
 <h3 align="left">🌐 Ссылки на сервер и домейны проекта:</h3>
+Проект изначально размещался в Яндекс-облаке, затем был переведен на хостинг Vercel (в скобках указаны изначальные ссылки).
 
 <ul>
-<li>🗄️ IP сервера: 158.160.40.254</li>
+<li>🗄️ IP сервера: динамический (бывший 158.160.40.254)</li>
 <li>⚛️ Frontend часть:
-<a href="https://movies.grishkov.nomoredomains.club" style="cursor: pointer">https://movies.grishkov.nomoredomains.club</a>
+<a href="https://movies-explorer-frontend-ruby.vercel.app" style="cursor: pointer">https://movies-explorer-frontend-ruby.vercel.app</a>
+(ссылка на проет в Яндекс-облаке <a href="https://movies.grishkov.nomoredomains.club" style="cursor: pointer">https://movies.grishkov.nomoredomains.club</a>)
 </li>
 <li>⚙️ Backend часть:
-<a href="https://api.movies.grishkov.nomoredomains.icu" style="cursor: pointer">https://api.movies.grishkov.nomoredomains.icu</a>
+<a href="https://movies-explorer-api-ten.vercel.app" style="cursor: pointer">https://movies-explorer-api-ten.vercel.app</a>
+(ссылка на проет в Яндекс-облаке <a href="https://api.movies.grishkov.nomoredomains.icu" style="cursor: pointer">https://api.movies.grishkov.nomoredomains.icu</a>)
 </li>
 <li>✍️Репозиторий с Backend частью:
 <a href="https://github.com/Andrey-Grishkov/movies-explorer-api" style="cursor: pointer">https://github.com/Andrey-Grishkov/movies-explorer-api</a>
