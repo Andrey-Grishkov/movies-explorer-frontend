@@ -1,6 +1,6 @@
 // export const BASE_URL = 'http://localhost:3001';
-
-export const BASE_URL = 'https://api.movies.grishkov.nomoredomains.icu';
+export const BASE_URL = 'https://movies-explorer-api-ten.vercel.app';
+// export const BASE_URL = 'https://api.movies.grishkov.nomoredomains.icu';
 export const beatFilmMovies = 'https://api.nomoreparties.co/'
 export const BEAT_FILM_MOVIES = 'https://api.nomoreparties.co/'
 export const BEAT_FILM_MOVIES_SERVER = 'https://api.nomoreparties.co/beatfilm-movies'
