@@ -41,7 +41,7 @@ function AboutMe() {
           </a>
         </li>
         <li>
-          <a className='about-me__link-container' href='https://mesto.front.grishkov.nomoredomains.icu' target="_blank">
+          <a className='about-me__link-container' href='https://mesto-react-frontend.vercel.app' target="_blank">
             <p className='about-me__link-name'>Одностраничное приложение</p>
             <img className='about-me__link-arrow' src={arrow} alt='стрелка'/>
           </a>
